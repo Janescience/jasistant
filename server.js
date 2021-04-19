@@ -21,17 +21,21 @@ fastify.register(require("point-of-view"), {
   }
 });
 
-// Our home page route, this pulls from src/pages/index.hbs
+// Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function(request, reply) {
   // params is an object we'll pass to our handlebars template
-  let params = {};
+  let params = {
+    greeting: "Hello Node!"
+  };
   // request.query.paramName <-- a querystring example
   reply.view("/src/pages/index.hbs", params);
 });
 
-// A POST route to handle form submissions 
+// A POST route to handle form submissions
 fastify.post("/", function(request, reply) {
-  let params = {};
+  let params = {
+    greeting: "Hello Form!"
+  };
   // request.body.paramName <-- a form post example
   reply.view("/src/pages/index.hbs", params);
 });
