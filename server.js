@@ -25,14 +25,14 @@ fastify.register(require("point-of-view"), {
 fastify.get("/", function(request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {};
-  // request.query.paramName
+  // request.query.paramName <-- a querystring example
   reply.view("/src/pages/index.hbs", params);
 });
 
-// A POST route to handle and react to form submissions 
+// A POST route to handle form submissions 
 fastify.post("/", function(request, reply) {
   let params = {};
-  // request.body.paramName
+  // request.body.paramName <-- a form post example
   reply.view("/src/pages/index.hbs", params);
 });
 
