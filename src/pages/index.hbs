@@ -8,14 +8,23 @@
     <title>Hello, Node</title>
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
-
-    <!-- this is a handlebars IF statement, checking for a custom "color" parameter set in server.js -->
-    {{#if color}} 
-
-    {{/if}}    
+    <link rel="stylesheet" href="/style.css" />   
   </head>
   <body>
+    
+    <!-- this is the start of content -->
+    <h1>
+      Hello Node!
+    </h1>
+    <p>
+      This starter gives you everything you need to start working on a new
+      project using Node, and nothing more. The form and link below give you
+      examples of If you're looking for something a 
+      little more opinionated, try remixing
+      <a href="https://glitch.com/edit/#!/remix/glitch-hello-website"
+        >~gitch-hello-website</a
+      >.
+    </p>
           
     <!-- the "what's your favorite color?" form sends a POST to the server, check server.js to see how it works -->
     <form class="color-search" method="post">
