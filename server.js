@@ -25,28 +25,14 @@ fastify.register(require("point-of-view"), {
 fastify.get("/", function(request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {};
-  // check and see if someone asked for a random color
-  if (request.query.randomize) {
-    // we need to load our color data file, pick one at random, and add it to the params
-    const colors = require("./src/colors.json");
-    const allColors = Object.keys(colors);
-    let currentColor = allColors[(allColors.length * Math.random()) << 0];
-    params = {
-      color: colors[currentColor],
-      colorError: null,
-    };
-  }
+  // request.query.randomize
   reply.view("/src/pages/index.hbs", params);
 });
 
 // A POST route to handle and react to form submissions 
 fastify.post("/", function(request, reply) {
   let params = {};
-  if (request.body.echo) {
-    params = {
-      echo: request.body.echo
-    };
-  }
+  // request.body.echo
   reply.view("/src/pages/index.hbs", params);
 });
 
