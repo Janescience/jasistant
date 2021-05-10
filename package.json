@@ -1,5 +1,5 @@
 {
-  "name": "hello-node",
+  "name": "glitch-mvp-node",
   "version": "0.0.1",
   "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "server.js",
@@ -17,7 +17,7 @@
     "node": "12.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": "https://glitch.com/edit/#!/glitch-mvp-node"
   },
   "license": "MIT",
   "keywords": [
