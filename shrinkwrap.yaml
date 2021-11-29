@@ -3,7 +3,7 @@ dependencies:
   fastify-formbody: 5.2.0
   fastify-static: 4.5.0
   handlebars: 4.7.7
-  point-of-view: 4.15.2
+  point-of-view: 4.15.3
 packages:
   /@fastify/ajv-compiler/1.1.0:
     dependencies:
@@ -418,13 +418,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-tJy6qVgkh9MwNgqX1/oYi3ehfl2Y9H0uHyEEMsBe74KinESIjdMrMQDWpcZPpPicg3VV35d/GLQZmo4QgU2Xkg==
-  /point-of-view/4.15.2:
+  /point-of-view/4.15.3:
     dependencies:
       fastify-plugin: 3.0.0
       hashlru: 2.3.0
     dev: false
     resolution:
-      integrity: sha512-4HH/lJRBx8dzFjK5EiK+m459Bkw85GDuRnbk9qnxjQfUg0HYADQvJU73lLxZlHO2G4f9KvslOoTbdBx51mlDdg==
+      integrity: sha512-J8vWEwug8gvv5WpWpejNnUEj0JcPdU7BrOKOYFhREmBRePQQfCBO8vvCtwnL+jBrIWukbpOyUmFgU4CD77XrAw==
   /proxy-addr/2.0.7:
     dependencies:
       forwarded: 0.2.0
@@ -631,4 +631,4 @@ specifiers:
   fastify-formbody: ^5.2.0
   fastify-static: ^4.5.0
   handlebars: ^4.7.7
-  point-of-view: ^4.15.2
+  point-of-view: ^4.15.3
