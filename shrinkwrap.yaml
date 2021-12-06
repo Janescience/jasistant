@@ -1,9 +1,9 @@
 dependencies:
-  fastify: 3.24.0
+  fastify: 3.24.1
   fastify-formbody: 5.2.0
   fastify-static: 4.5.0
   handlebars: 4.7.7
-  point-of-view: 4.15.3
+  point-of-view: 4.16.0
 packages:
   /@fastify/ajv-compiler/1.1.0:
     dependencies:
@@ -24,7 +24,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
-  /ajv/8.8.0:
+  /ajv/8.8.2:
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -32,7 +32,7 @@ packages:
       uri-js: 4.4.1
     dev: false
     resolution:
-      integrity: sha512-L+cJ/+pkdICMueKR6wIx3VP2fjIx3yAhuvadUv/osv9yFD7OVZy442xFF+Oeu3ZvmhBGQzoF6mTSt+LUWBmGQg==
+      integrity: sha512-x9VuX+R/jcFj1DHo/fCp99esgGDWiHENrKxaCENuCxpoMCmAt/COCGVDwA7kleEpEzJjDnvh3yGoOuLu0Dtllw==
   /archy/1.0.0:
     dev: false
     resolution:
@@ -46,7 +46,7 @@ packages:
   /avvio/7.2.2:
     dependencies:
       archy: 1.0.0
-      debug: 4.3.2
+      debug: 4.3.3
       fastq: 1.13.0
       queue-microtask: 1.2.3
     dev: false
@@ -87,14 +87,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
-  /debug/4.3.2:
+  /debug/4.3.3:
     dependencies:
       ms: 2.1.2
     dev: false
     engines:
       node: '>=6.0'
     resolution:
-      integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
+      integrity: sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
   /deepmerge/4.2.2:
     dev: false
     engines:
@@ -200,7 +200,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-s1EQguBw/9qtc1p/WTY4eq9WMRIACkj+HTcOIK1in4MV5aFaQC9ZCIt0dJ7pr5bIf4lPpHvAtP2ywpTNgs7hqw==
-  /fastify/3.24.0:
+  /fastify/3.24.1:
     dependencies:
       '@fastify/ajv-compiler': 1.1.0
       abstract-logging: 2.0.1
@@ -210,7 +210,7 @@ packages:
       fastify-warning: 0.2.0
       find-my-way: 4.4.0
       flatstr: 1.0.12
-      light-my-request: 4.6.0
+      light-my-request: 4.7.0
       pino: 6.13.3
       proxy-addr: 2.0.7
       rfdc: 1.3.0
@@ -219,7 +219,7 @@ packages:
       tiny-lru: 7.0.6
     dev: false
     resolution:
-      integrity: sha512-fmRyrI25rzLGHDQ1FME02NsbP658mVa0EaSqfYUFwx2UOF+4/GcyNrsdWILSDOEiUbOsRYCD3sRCE9v7mvRLRQ==
+      integrity: sha512-ZL0V6u37d65tAY8lMwVMFtFvnEeJcG80QBNSdChqCm4i4x+is/38OU14gzJuRXhpenTL+pTJzNcu5Kn1ouzM3Q==
   /fastq/1.13.0:
     dependencies:
       reusify: 1.0.4
@@ -323,15 +323,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
-  /light-my-request/4.6.0:
+  /light-my-request/4.7.0:
     dependencies:
-      ajv: 8.8.0
+      ajv: 8.8.2
       cookie: 0.4.1
       fastify-warning: 0.2.0
       set-cookie-parser: 2.4.8
     dev: false
     resolution:
-      integrity: sha512-wQWGwMr7l7fzYPzzzutRoEI1vuREpIpJpTi3t8cHlGdsnBrOF5iR559Bkh+nkDGgnUJtNuuutjnqbxP7zPWKkA==
+      integrity: sha512-LTa8YZp3K2AUpqUnwwKajoIHcsKOBnzwJNQSrk7unziPwo6CjOYjyO0F9wfkxFvP+nBsCGe3eMPnedVgIIgdAw==
   /lru-cache/6.0.0:
     dependencies:
       yallist: 4.0.0
@@ -418,13 +418,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-tJy6qVgkh9MwNgqX1/oYi3ehfl2Y9H0uHyEEMsBe74KinESIjdMrMQDWpcZPpPicg3VV35d/GLQZmo4QgU2Xkg==
-  /point-of-view/4.15.3:
+  /point-of-view/4.16.0:
     dependencies:
       fastify-plugin: 3.0.0
       hashlru: 2.3.0
     dev: false
     resolution:
-      integrity: sha512-J8vWEwug8gvv5WpWpejNnUEj0JcPdU7BrOKOYFhREmBRePQQfCBO8vvCtwnL+jBrIWukbpOyUmFgU4CD77XrAw==
+      integrity: sha512-pZXJ/++bF0rDsdlb91cD7Yh+Fd3RMloXw40UPVriEl+5VJ1jV8wjYyQnatM5SbCzeP+xvEYA6+dLwp3jQZFDWw==
   /proxy-addr/2.0.7:
     dependencies:
       forwarded: 0.2.0
@@ -627,8 +627,8 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  fastify: ^3.24.0
+  fastify: ^3.24.1
   fastify-formbody: ^5.2.0
   fastify-static: ^4.5.0
   handlebars: ^4.7.7
-  point-of-view: ^4.15.3
+  point-of-view: ^4.16.0
