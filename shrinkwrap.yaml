@@ -1,5 +1,5 @@
 dependencies:
-  fastify: 3.25.3
+  fastify: 3.26.0
   fastify-formbody: 5.2.0
   fastify-static: 4.5.0
   handlebars: 4.7.7
@@ -24,7 +24,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
-  /ajv/8.8.2:
+  /ajv/8.9.0:
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -32,7 +32,7 @@ packages:
       uri-js: 4.4.1
     dev: false
     resolution:
-      integrity: sha512-x9VuX+R/jcFj1DHo/fCp99esgGDWiHENrKxaCENuCxpoMCmAt/COCGVDwA7kleEpEzJjDnvh3yGoOuLu0Dtllw==
+      integrity: sha512-qOKJyNj/h+OWx7s5DePL6Zu1KeM9jPZhwBqs+7DzP6bGOvqzVCSf0xueYmVuaC/oQ/VtS2zLMLHdQFbkka+XDQ==
   /archy/1.0.0:
     dev: false
     resolution:
@@ -200,7 +200,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-s1EQguBw/9qtc1p/WTY4eq9WMRIACkj+HTcOIK1in4MV5aFaQC9ZCIt0dJ7pr5bIf4lPpHvAtP2ywpTNgs7hqw==
-  /fastify/3.25.3:
+  /fastify/3.26.0:
     dependencies:
       '@fastify/ajv-compiler': 1.1.0
       abstract-logging: 2.0.1
@@ -219,7 +219,7 @@ packages:
       tiny-lru: 7.0.6
     dev: false
     resolution:
-      integrity: sha512-20SbobjjMfjGNCU4PlcZis3d5XLDtQxIbcAf6ogi/8zPxRxOOkKwfjmj7yW9Q1VnxDpBwcllwPtbZ/LyvQzXbQ==
+      integrity: sha512-gNLrLNNWKh93IWzz3BPpcEL8MylxBNtpOSUKsxiuqXnTefGG75Em1ZU2AYmlfvKTpmA3T+3NaN72U/vlHAP7+A==
   /fastq/1.13.0:
     dependencies:
       reusify: 1.0.4
@@ -325,7 +325,7 @@ packages:
       integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
   /light-my-request/4.7.0:
     dependencies:
-      ajv: 8.8.2
+      ajv: 8.9.0
       cookie: 0.4.1
       fastify-warning: 0.2.0
       set-cookie-parser: 2.4.8
@@ -631,7 +631,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  fastify: ^3.25.3
+  fastify: ^3.26.0
   fastify-formbody: ^5.2.0
   fastify-static: ^4.5.0
   handlebars: ^4.7.7
