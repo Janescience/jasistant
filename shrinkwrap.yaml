@@ -1,9 +1,9 @@
 dependencies:
   fastify: 3.27.4
   fastify-formbody: 5.2.0
-  fastify-static: 4.5.0
+  fastify-static: 4.6.1
   handlebars: 4.7.7
-  point-of-view: 5.1.0
+  point-of-view: 5.2.0
 packages:
   /@fastify/ajv-compiler/1.1.0:
     dependencies:
@@ -67,14 +67,14 @@ packages:
     dev: false
     resolution:
       integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
-  /content-disposition/0.5.3:
+  /content-disposition/0.5.4:
     dependencies:
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
     engines:
       node: '>= 0.6'
     resolution:
-      integrity: sha512-ExO0774ikEObIAEV9kDo50o+79VCUdEB6n6lzKgGwupcVeRlhrj3qGAfwq8G6uBJjkqLrhT0qEYFcWng8z1z0g==
+      integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==
   /cookie/0.4.2:
     dev: false
     engines:
@@ -188,18 +188,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-qKcDXmuZadJqdTm6vlCqioEbyewF60b/0LOFCcYN1B6BIZGlYJumWWOYs70SFYLDAH4YqdE1cxH/RKMG7rFxgA==
-  /fastify-static/4.5.0:
+  /fastify-static/4.6.1:
     dependencies:
-      content-disposition: 0.5.3
+      content-disposition: 0.5.4
       encoding-negotiator: 2.0.1
-      fastify-plugin: 3.0.0
+      fastify-plugin: 3.0.1
       glob: 7.2.0
       p-limit: 3.1.0
       readable-stream: 3.6.0
-      send: 0.17.1
+      send: 0.17.2
     dev: false
     resolution:
-      integrity: sha512-Q7Tgl55AjsmBwiO4hKYib2BUCt+XTWLJ6Xp8YPPHU3EsrKNpevJ4cz8pjf1Ey1QhHw9O8Y2FDKdu+IC74oHvqw==
+      integrity: sha512-vy7N28U4AMhuOim12ZZWHulEE6OQKtzZbHgiB8Zj4llUuUQXPka0WHAQI3njm1jTCx4W6fixUHfpITxweMtAIA==
   /fastify/3.27.4:
     dependencies:
       '@fastify/ajv-compiler': 1.1.0
@@ -262,7 +262,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -286,18 +286,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0cMsjjIC8I+D3M44pOQdsy0OHXGLVz6Z0beRuufhKa0KfaD2wGwAev6jILzXsd3/vpnNQJmWyZtIILqM1N+n5A==
-  /http-errors/1.7.3:
+  /http-errors/1.8.1:
     dependencies:
       depd: 1.1.2
       inherits: 2.0.4
-      setprototypeof: 1.1.1
+      setprototypeof: 1.2.0
       statuses: 1.5.0
-      toidentifier: 1.0.0
+      toidentifier: 1.0.1
     dev: false
     engines:
       node: '>= 0.6'
     resolution:
-      integrity: sha512-ZTTX0MWrsQ2ZAhA1cejAwDLycFsd7I7nVtnkT3Ol0aqodaKW+0CTZDQ1uBv5whptCnc8e8HeRRJxRs0kmm/Qfw==
+      integrity: sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==
   /inflight/1.0.6:
     dependencies:
       once: 1.4.0
@@ -347,12 +347,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
-  /minimatch/3.0.4:
+  /minimatch/3.1.2:
     dependencies:
       brace-expansion: 1.1.11
     dev: false
     resolution:
-      integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
+      integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   /minimist/1.2.5:
     dev: false
     resolution:
@@ -361,14 +361,14 @@ packages:
     dev: false
     resolution:
       integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
-  /ms/2.1.1:
-    dev: false
-    resolution:
-      integrity: sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
   /ms/2.1.2:
     dev: false
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+  /ms/2.1.3:
+    dev: false
+    resolution:
+      integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
   /neo-async/2.6.2:
     dev: false
     resolution:
@@ -418,13 +418,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-iuhEDel3Z3hF9Jfe44DPXR8l07bhjuFY3GMHIXbjnY9XcafbyDDwl2sN2vw2GjMPf5Nkoe+OFao7ffn9SXaKDg==
-  /point-of-view/5.1.0:
+  /point-of-view/5.2.0:
     dependencies:
       fastify-plugin: 3.0.1
       hashlru: 2.3.0
     dev: false
     resolution:
-      integrity: sha512-jrQXgIAY4Lv30REMVeLA7vEkpLGREMPjxR4uiD+ysDlgtPqcJH9UBD8qBPBpAHH01XgTmjrle9U4gmjnLCr2XA==
+      integrity: sha512-PYoeqEunutxZTmNih6NXXoz8xZZopzw2MWgBoKPLcofOJNagEoXVpzbHT30AkK/9ArKjJYrvV6iU8JAg87+VMw==
   /process-warning/1.0.0:
     dev: false
     resolution:
@@ -491,10 +491,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==
-  /safe-buffer/5.1.2:
-    dev: false
-    resolution:
-      integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
   /safe-buffer/5.2.1:
     dev: false
     resolution:
@@ -522,7 +518,7 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
-  /send/0.17.1:
+  /send/0.17.2:
     dependencies:
       debug: 2.6.9
       depd: 1.1.2
@@ -531,9 +527,9 @@ packages:
       escape-html: 1.0.3
       etag: 1.8.1
       fresh: 0.5.2
-      http-errors: 1.7.3
+      http-errors: 1.8.1
       mime: 1.6.0
-      ms: 2.1.1
+      ms: 2.1.3
       on-finished: 2.3.0
       range-parser: 1.2.1
       statuses: 1.5.0
@@ -541,15 +537,15 @@ packages:
     engines:
       node: '>= 0.8.0'
     resolution:
-      integrity: sha512-BsVKsiGcQMFwT8UxypobUKyv7irCNRHk1T0G680vk88yf6LBByGcZJOTJCrTP2xVN6yI+XjPJcNuE3V4fT9sAg==
+      integrity: sha512-UJYB6wFSJE3G00nEivR5rgWp8c2xXvJ3OPWPhmuteU0IKj8nKbG3DrjiOmLwpnHGYWAVwA69zmTm++YG0Hmwww==
   /set-cookie-parser/2.4.8:
     dev: false
     resolution:
       integrity: sha512-edRH8mBKEWNVIVMKejNnuJxleqYE/ZSdcT8/Nem9/mmosx12pctd80s2Oy00KNZzrogMZS5mauK2/ymL1bvlvg==
-  /setprototypeof/1.1.1:
+  /setprototypeof/1.2.0:
     dev: false
     resolution:
-      integrity: sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
+      integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
   /sonic-boom/1.4.1:
     dependencies:
       atomic-sleep: 1.0.0
@@ -585,12 +581,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-ApGvZ6vVvTNdsmt676grvCkUCGwzG9IqXma5Z07xJgiC5L7akUMof5U8G2JTI9Rz/ovtVhJBlY6mNhEvtjzOIg==
-  /toidentifier/1.0.0:
+  /toidentifier/1.0.1:
     dev: false
     engines:
       node: '>=0.6'
     resolution:
-      integrity: sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+      integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
   /uglify-js/3.13.3:
     dev: false
     engines:
@@ -633,6 +629,6 @@ shrinkwrapVersion: 3
 specifiers:
   fastify: ^3.27.4
   fastify-formbody: ^5.2.0
-  fastify-static: ^4.5.0
+  fastify-static: ^4.6.1
   handlebars: ^4.7.7
-  point-of-view: ^5.1.0
+  point-of-view: ^5.2.0
