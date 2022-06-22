@@ -7,16 +7,16 @@ const fastify = require("fastify")({
 });
 
 // Setup our static files
-fastify.register(require("fastify-static"), {
+fastify.register(require("@fastify/static"), {
   root: path.join(__dirname, "public"),
   prefix: "/" // optional: default '/'
 });
 
 // fastify-formbody lets us parse incoming forms
-fastify.register(require("fastify-formbody"));
+fastify.register(require("@fastify/formbody"));
 
 // point-of-view is a templating manager for fastify
-fastify.register(require("point-of-view"), {
+fastify.register(require("@fastify/view"), {
   engine: {
     handlebars: require("handlebars")
   }
@@ -29,7 +29,7 @@ fastify.get("/", function(request, reply) {
     greeting: "Hello Node!"
   };
   // request.query.paramName <-- a querystring example
-  reply.view("/src/pages/index.hbs", params);
+  return reply.view("/src/pages/index.hbs", params);
 });
 
 // A POST route to handle form submissions
@@ -38,11 +38,11 @@ fastify.post("/", function(request, reply) {
     greeting: "Hello Form!"
   };
   // request.body.paramName <-- a form post example
-  reply.view("/src/pages/index.hbs", params);
+  return reply.view("/src/pages/index.hbs", params);
 });
 
 // Run the server and report out to the logs
-fastify.listen(process.env.PORT, '0.0.0.0', function(err, address) {
+fastify.listen({port:process.env.PORT, host:'0.0.0.0'}, function(err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
