@@ -1,10 +1,10 @@
-export function toMessages(data) {
+const toMessages = (data) => {
   if (!data) data = "..."
   if (typeof data === "string") data = [{ type: "text", text: data }]
   return data
 }
 
-export function createBubble(
+const createBubble = (
   title,
   text,
   {
@@ -14,7 +14,7 @@ export function createBubble(
     altText = String(text),
     footer
   } = {}
-) {
+) => {
   const data = {
     type: "bubble",
     styles: {
@@ -67,3 +67,10 @@ function truncate(text, maxLength) {
     ? text.substr(0, maxLength - 5) + "…"
     : text
 }
+
+const utility = {
+  toMessages,
+  createBubble
+};
+
+module.exports = utility;

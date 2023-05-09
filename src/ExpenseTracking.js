@@ -1,7 +1,7 @@
-import Airtable from "airtable"
-import { createBubble } from "./LineMessageUtility"
+const Airtable = require("airtable")
+const { createBubble } = require("./LineMessageUtility")
 
-export async function recordExpense(amount, category, remarks = "") {
+const recordExpense= async (amount, category, remarks = "") => {
   const date = new Date().toJSON().split("T")[0]
   // Airtable
   const table = getExpensesTable()
@@ -72,11 +72,13 @@ export async function recordExpense(amount, category, remarks = "") {
   })
   return bubble
 }
+
 function getExpensesTable() {
   return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     .base(process.env.AIRTABLE_EXPENSE_BASE)
     .table("Expense Records")
 }
+
 async function getExpensesSummaryData() {
   const date = new Date().toJSON().split("T")[0]
   const tableData = await getExpensesTable()
@@ -104,3 +106,9 @@ async function getExpensesSummaryData() {
     ["day", `${dayNumber}`]
   ]
 }
+
+const expenseTracking = {
+  recordExpense
+};
+
+module.exports = expenseTracking;

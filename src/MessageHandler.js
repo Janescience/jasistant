@@ -1,8 +1,8 @@
 
-import { decodeRomanNumerals } from "./RomanNumerals"
-import { recordExpense } from "./ExpenseTracking"
+const { decodeRomanNumerals } =  require("./RomanNumerals")
+const { recordExpense } = require("./ExpenseTracking")
 
-export async function handleTextMessage(message){
+const handleTextMessage = async (message) =>{
   message = message.trim()
   let match
   
@@ -26,3 +26,9 @@ export async function handleTextMessage(message){
     return await recordExpense(amount, category, remarks)
   }
 }
+
+const handler = {
+  handleTextMessage
+};
+
+module.exports = handler;

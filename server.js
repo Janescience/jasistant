@@ -1,8 +1,8 @@
 const path = require("path");
 const axios = require("axios");
 const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN
-const { handleTextMessage } = './MessageHandler'
-const { toMessages } = './LineMessageUtility'
+const { handleTextMessage } = require('./src/MessageHandler')
+const { toMessages } = require('./src/LineMessageUtility')
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // set this to true for detailed logging:
@@ -57,9 +57,7 @@ async function handleMessageEvent(event){
   }
   
   if (message.type === 'text') {
-      const reply = await handleTextMessage(context, message.text, {
-        source: 'line',
-      })
+      const reply = await handleTextMessage(message.text)
       await replyMessage(replyToken, toMessages(reply))
   }
 }

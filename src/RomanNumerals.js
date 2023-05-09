@@ -1,4 +1,4 @@
-export function decodeRomanNumerals(romanNumerals) {
+const decodeRomanNumerals = (romanNumerals) => {
   const decode = s => {
     if (s.startsWith("M")) return 1000 + decode(s.substr(1))
     if (s.startsWith("CM")) return 900 + decode(s.substr(2))
@@ -31,3 +31,9 @@ class InvalidRomanNumeralError extends Error {
     super("Invalid roman numeral in input " + s)
   }
 }
+
+const numerals = {
+  decodeRomanNumerals
+};
+
+module.exports = numerals;
