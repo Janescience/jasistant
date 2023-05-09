@@ -3,7 +3,7 @@ const { AirtableRecord } = require('airtable')
 const { createBubble } = require("./LineMessageUtility")
 
 const recordExpense= async (amount, category, remarks = "") => {
-  const date = new Date().toJSON().split("T")[0]
+  const date = new Date()
   // Airtable
   const table = getExpensesTable()
   const record = await table.create(
@@ -86,13 +86,13 @@ async function getExpensesSummaryData() {
     .select()
     .all()
   const normalRecords = tableData.filter(r => !r.get("Occasional"))
-  const records = AirtableRecord[];
+  const records = AirtableRecord;
   const total = records =>
     records.map(r => +r.get("Amount") || 0).reduce((a, b) => a + b, 0)
   const firstDate = normalRecords
     .map(r => r.get("Date"))
     .reduce((a, b) => (a < b ? a : b), date)
-  const todayUsage = total(normalRecords.filter(r => r.get("Date") === date))
+  const todayUsage = total(normalRecords.filter(r => (r.get("Date") ? r.get("Date").split()) === date))
   const totalUsage = total(normalRecords)
   const dayNumber =
     Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1
