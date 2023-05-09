@@ -6,7 +6,7 @@ const handleTextMessage = async (message) =>{
   message = message.trim()
   let match
   
-  if (match = message.match(/^([\d.]+|[ivxlcdm]+)(j?)([tfghmol])([ ^a-zA-Z0-9])$/i)) {
+  if (match = message.match(/^([\d.]+|[ivxlcdm]+)(j?)([tfghmol]+)([ \w]+)$/i)) {
     const m = match
     const enteredAmount = m[1].match(/[ivxlcdm]/)
       ? decodeRomanNumerals(m[1])
@@ -15,6 +15,7 @@ const handleTextMessage = async (message) =>{
     const category = {
       t: "transportation",
       f: "food",
+      d: "drinks",
       g: "game",
       h: "health",
       m: "miscellaneous",
@@ -24,7 +25,7 @@ const handleTextMessage = async (message) =>{
     const remarks = m[2] ? `${m[1]} THB` : ""
     const name = m[4] ? m[4] : ""
     console.log('name : ',name)
-    return await recordExpense(amount, category, remarks)
+    return await recordExpense(name,amount, category, remarks)
   }
 }
 

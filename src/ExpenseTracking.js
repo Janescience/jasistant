@@ -2,12 +2,13 @@ const Airtable  = require("airtable")
 const { AirtableRecord } = require('airtable')
 const { createBubble } = require("./LineMessageUtility")
 
-const recordExpense= async (amount, category, remarks = "") => {
+const recordExpense= async (name,amount, category, remarks = "") => {
   const date = new Date()
   // Airtable
   const table = getExpensesTable()
   const record = await table.create(
     {
+      Name : name,
       Date: date,
       Category: category,
       Amount: amount,
