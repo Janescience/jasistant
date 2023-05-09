@@ -11,8 +11,7 @@ const handleTextMessage = async (message) =>{
     const enteredAmount = m[1].match(/[ivxlcdm]/)
       ? decodeRomanNumerals(m[1])
       : +m[1]
-    const conversionRate = m[2] ? 0.302909 : 1
-    const amount = (enteredAmount * conversionRate).toFixed(2)
+    const amount = enteredAmount.toFixed(2)
     const category = {
       t: "transportation",
       f: "food",
@@ -21,7 +20,7 @@ const handleTextMessage = async (message) =>{
       m: "miscellaneous",
       o: "occasion",
       l: "lodging"
-    }[m[3].toLowerCase()]
+    }[m[2].toLowerCase()]
     const remarks = m[2] ? `${m[1]} THB` : ""
     return await recordExpense(amount, category, remarks)
   }
