@@ -3,7 +3,7 @@ const path = require("path");
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // set this to true for detailed logging:
-  logger: false,
+  logger: true,
 });
 
 // Setup our static files
