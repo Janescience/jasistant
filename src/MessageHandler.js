@@ -1,7 +1,11 @@
 
-
+import { decodeRomanNumerals } from "./RomanNumerals"
+import { recordExpense } from "./ExpenseTracking"
 
 export async function handleTextMessage(message){
+  message = message.trim()
+  let match
+  
   if ((match = message.match(/^([\d.]+|[ivxlcdm]+)(j?)([tfghmol])$/i))) {
     const m = match
     const enteredAmount = m[1].match(/[ivxlcdm]/)
@@ -18,7 +22,7 @@ export async function handleTextMessage(message){
       o: "occasion",
       l: "lodging"
     }[m[3].toLowerCase()]
-    const remarks = m[2] ? `${m[1]} JPY` : ""
+    const remarks = m[2] ? `${m[1]} THB` : ""
     return await recordExpense(context, amount, category, remarks)
   }
 }
