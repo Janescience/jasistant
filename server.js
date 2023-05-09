@@ -39,26 +39,25 @@ fastify.get("/", function (request, reply) {
 
 // A POST route to handle form submissions
 fastify.post("/webhook", async (req, res) => {
-    await handleRequest(req, res, async (services) => {
-      const lineClient = services.line
-      console.info(
-        { ingest: "line", event: JSON.stringify(req.body) },
-        "Received webhook from LINE"
-      )
-      const data = await handleWebhook(req.body.events, lineClient)
-      return data
-    })
+    const lineConfig = getLineConfig(req, res)
+    const lineClient = new Client(lineConfig)
+    console.info(
+      { ingest: "line", event: JSON.stringify(req.body) },
+      "Received webhook from LINE"
+    )
+    const data = await handleWebhook(req.body.events, lineClient)
+    return data
 });
 
 async function handleWebhook(events, client) {
-  async function main() {
-    for (const event of events) {
-      if (event.type === "message") {
-        await handleMessageEvent(event)
-      }
+  for (const event of events) {
+    if (event.type === "message") {
+      await handleMessageEvent(event,client)
     }
   }
-  async function handleMessageEvent(event){
+}
+
+async function handleMessageEvent(event,client){
     const { replyToken, message } = event
     if(event.source.userId !== process.env.LINE_USER_ID){
       await client.replyMessage(event.replyToken,toMessages('unauthorized'))
@@ -67,27 +66,10 @@ async function handleWebhook(events, client) {
 
     if (message.type === 'text') {
         const reply = await handleTextMessage(message.text)
+        console.log('reply : ',reply)
         await client.replyMessage(replyToken, toMessages(reply))
     }
   }
-}
-
-async function handleRequest(req, res, f) {
-  const lineConfig = getLineConfig(req, res)
-  const lineClient = new Client(lineConfig)
-
-  try {
-    const result = await f({
-      line: lineClient,
-    })
-    await Promise.allSettled(res.yields || [])
-    res.json({ ok: true, result })
-  } catch (e) {
-    console.error("Unable to execute endpoint " + req.path, e)
-    await Promise.allSettled(res.yields || [])
-    throw e
-  }
-}
 
 function getLineConfig(req, res) {
   return {
