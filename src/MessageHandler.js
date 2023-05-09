@@ -6,7 +6,7 @@ const handleTextMessage = async (message) =>{
   message = message.trim()
   let match
   
-  if (match = message.match(/^([\d.]+|[ivxlcdm]+)(j?)([tfghmol]+)([ \w]+)$/i)) {
+  if (match = message.match(/^([\d.]+|[ivxlcdm]+)(j?)([tfghmol])([ \w]+|)$/i)) {
     const m = match
     const enteredAmount = m[1].match(/[ivxlcdm]/)
       ? decodeRomanNumerals(m[1])

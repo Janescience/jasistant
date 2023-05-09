@@ -8,7 +8,7 @@ const recordExpense= async (name,amount, category, remarks = "") => {
   const table = getExpensesTable()
   const record = await table.create(
     {
-      Name : name,
+      Name : name.trim(),
       Date: date,
       Category: category,
       Amount: amount,
@@ -28,7 +28,7 @@ const recordExpense= async (name,amount, category, remarks = "") => {
       },
       {
         type: "text",
-        text: `${category}\nrecorded`,
+        text: `${category}${name?'/'+name.trim():''}\nrecorded`,
         wrap: true
       }
     ],
