@@ -3,6 +3,8 @@ const axios = require("axios");
 const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN
 const { handleTextMessage } = require('./src/MessageHandler')
 const { toMessages } = require('./src/LineMessageUtility')
+const { Client } =  require('@line/bot-sdk')
+
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // set this to true for detailed logging:
@@ -36,7 +38,7 @@ fastify.get("/", function (request, reply) {
 });
 
 // A POST route to handle form submissions
-fastify.post("/webhook", async function (request, reply) {
+fastify.post("/webhook", async (req, res) => {
   if(request.query.apiKey !== process.env.API_KEY){
     console.warn('request is not from line.')
     return 'Request is not from LINE!!'
@@ -49,18 +51,29 @@ fastify.post("/webhook", async function (request, reply) {
   return 'ok';
 });
 
-async function handleMessageEvent(event){
-  const { replyToken, message } = event
-  if(event.source.userId !== process.env.LINE_USER_ID){
-    await replyMessage(event.replyToken,toMessages('unauthorized'))
-    return 
+async function handleWebhook(context, events, client) {
+  async function main() {
+    for (const event of events) {
+      if (event.type === "message") {
+        await handleMessageEvent(event)
+      }
+    }
   }
-  
-  if (message.type === 'text') {
-      const reply = await handleTextMessage(message.text)
-      await replyMessage(replyToken, toMessages(reply))
+  async function handleMessageEvent(event){
+    const { replyToken, message } = event
+    if(event.source.userId !== process.env.LINE_USER_ID){
+      await replyMessage(event.replyToken,toMessages('unauthorized'))
+      return 
+    }
+
+    if (message.type === 'text') {
+        const reply = await handleTextMessage(message.text)
+        await Client.replyMessage(replyToken, toMessages(reply))
+    }
   }
 }
+
+
 
 async function replyMessage(replyToken,message){
   console.warn(message)
