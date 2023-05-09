@@ -39,19 +39,18 @@ fastify.get("/", function (request, reply) {
 
 // A POST route to handle form submissions
 fastify.post("/webhook", async (req, res) => {
-  if(request.query.apiKey !== process.env.API_KEY){
-    console.warn('request is not from line.')
-    return 'Request is not from LINE!!'
-  }
-  for(const event of request.body.events){
-    if(event.type === 'message'){
-      await handleMessageEvent(event);
-    }
-  }
-  return 'ok';
+    await handleRequest(req, res, async (services) => {
+      const lineClient = services.line
+      console.info(
+        { ingest: "line", event: JSON.stringify(req.body) },
+        "Received webhook from LINE"
+      )
+      const data = await handleWebhook(req.body.events, lineClient)
+      return data
+    })
 });
 
-async function handleWebhook(context, events, client) {
+async function handleWebhook(events, client) {
   async function main() {
     for (const event of events) {
       if (event.type === "message") {
@@ -62,35 +61,39 @@ async function handleWebhook(context, events, client) {
   async function handleMessageEvent(event){
     const { replyToken, message } = event
     if(event.source.userId !== process.env.LINE_USER_ID){
-      await replyMessage(event.replyToken,toMessages('unauthorized'))
+      await client.replyMessage(event.replyToken,toMessages('unauthorized'))
       return 
     }
 
     if (message.type === 'text') {
         const reply = await handleTextMessage(message.text)
-        await Client.replyMessage(replyToken, toMessages(reply))
+        await client.replyMessage(replyToken, toMessages(reply))
     }
   }
 }
 
+async function handleRequest(req, res, f) {
+  const lineConfig = getLineConfig(req, res)
+  const lineClient = new Client(lineConfig)
 
+  try {
+    const result = await f({
+      line: lineClient,
+    })
+    await Promise.allSettled(res.yields || [])
+    res.json({ ok: true, result })
+  } catch (e) {
+    console.error("Unable to execute endpoint " + req.path, e)
+    await Promise.allSettled(res.yields || [])
+    throw e
+  }
+}
 
-async function replyMessage(replyToken,message){
-  console.warn(message)
-  await axios.post('https://api.line.me/v2/bot/message/reply',{
-        replyToken : replyToken,
-        messages : [
-          {
-            type : 'text',
-            text : message
-          }
-        ]
-    },{
-      headers : {
-        authorization : `Bearer ${channelAccessToken}`
-      }
-    }
-  )
+function getLineConfig(req, res) {
+  return {
+    channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.LINE_CHANNEL_SECRET
+  }
 }
 
 // Run the server and report out to the logs
