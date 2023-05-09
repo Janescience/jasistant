@@ -2,6 +2,7 @@ const path = require("path");
 const axios = require("axios");
 const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN
 const { handleTextMessage } = './MessageHandler'
+const { toMessages } = './LineMessageUtility'
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // set this to true for detailed logging:
@@ -51,7 +52,7 @@ fastify.post("/webhook", async function (request, reply) {
 async function handleMessageEvent(event){
   const { replyToken, message } = event
   if(event.source.userId !== process.env.LINE_USER_ID){
-    await replyMessage(event.replyToken,'unauthorized')
+    await replyMessage(event.replyToken,toMessages('unauthorized'))
     return 
   }
   
@@ -59,7 +60,7 @@ async function handleMessageEvent(event){
       const reply = await handleTextMessage(context, message.text, {
         source: 'line',
       })
-      await replyMessage(replyToken, reply)
+      await replyMessage(replyToken, toMessages(reply))
   }
 }
 

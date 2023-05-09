@@ -23,6 +23,6 @@ export async function handleTextMessage(message){
       l: "lodging"
     }[m[3].toLowerCase()]
     const remarks = m[2] ? `${m[1]} THB` : ""
-    return await recordExpense(context, amount, category, remarks)
+    return await recordExpense(amount, category, remarks)
   }
 }
