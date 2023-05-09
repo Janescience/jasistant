@@ -4,7 +4,7 @@ import { createBubble } from "./LineMessageUtility"
 export async function recordExpense(amount, category, remarks = "") {
   const date = new Date().toJSON().split("T")[0]
   // Airtable
-  const table = getExpensesTable(context)
+  const table = getExpensesTable()
   const record = await table.create(
     {
       Date: date,
