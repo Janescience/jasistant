@@ -1,4 +1,5 @@
-const Airtable = require("airtable")
+const Airtable  = require("airtable")
+const { AirtableRecord } = require('airtable')
 const { createBubble } = require("./LineMessageUtility")
 
 const recordExpense= async (amount, category, remarks = "") => {
@@ -37,7 +38,7 @@ const recordExpense= async (amount, category, remarks = "") => {
     }
   }
   const footer = await getExpensesSummaryData();
-  const bubble = createBubble("expense tracking", body, {
+  const bubble = createBubble("Expense Tracking", body, {
     headerColor: "#ffffbb",
     footer: {
       type: "box",
@@ -85,6 +86,7 @@ async function getExpensesSummaryData() {
     .select()
     .all()
   const normalRecords = tableData.filter(r => !r.get("Occasional"))
+  const records = AirtableRecord[];
   const total = records =>
     records.map(r => +r.get("Amount") || 0).reduce((a, b) => a + b, 0)
   const firstDate = normalRecords
