@@ -58,18 +58,18 @@ async function handleWebhook(events, client) {
 }
 
 async function handleMessageEvent(event,client){
-    const { replyToken, message } = event
-    if(event.source.userId !== process.env.LINE_USER_ID){
-      await client.replyMessage(event.replyToken,toMessages('unauthorized'))
-      return 
-    }
-
-    if (message.type === 'text') {
-        const reply = await handleTextMessage(message.text)
-        console.log('reply : ',reply)
-        await client.replyMessage(replyToken, toMessages(reply))
-    }
+  const { replyToken, message } = event
+  if(event.source.userId !== process.env.LINE_USER_ID){
+    await client.replyMessage(event.replyToken,toMessages('unauthorized'))
+    return 
   }
+
+  if (message.type === 'text') {
+      const reply = await handleTextMessage(message.text)
+      console.log('reply : ',reply)
+      await client.replyMessage(replyToken, toMessages(reply))
+  }
+}
 
 function getLineConfig(req, res) {
   return {
