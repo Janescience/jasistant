@@ -1,5 +1,6 @@
 const path = require("path");
-
+const axios = require("axios");
+const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // set this to true for detailed logging:
@@ -33,12 +34,22 @@ fastify.get("/", function (request, reply) {
 });
 
 // A POST route to handle form submissions
-fastify.post("/", function (request, reply) {
-  let params = {
-    greeting: "Hello Form!",
-  };
-  // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/index.hbs", params);
+fastify.post("/line-webhook", function (request, reply) {
+  for(const event of request.body.events){
+    if(event.type === 'message'){
+      console.log(event);
+      axios.post('https://api.line.me/v2/bot/message/reply',{
+        replyToken : event.replyToken,
+        messages : [
+          { type : 'text', text : 'Hi'}
+        ]
+      },{
+        headers : {
+          authorization : `Bearer ${channelAccessToken}`
+        }
+      })
+    }
+  }
 });
 
 // Run the server and report out to the logs
