@@ -90,9 +90,9 @@ async function getExpensesSummaryData() {
   const total = records =>
     records.map(r => +r.get("Amount") || 0).reduce((a, b) => a + b, 0)
   const firstDate = normalRecords
-    .map(r => r.get("Date"))
+    .map(r => (r.get("Date") ? r.get("Date").split('T')[0] : r.get("Date")))
     .reduce((a, b) => (a < b ? a : b), date)
-  const todayUsage = total(normalRecords.filter(r => (r.get("Date") ? r.get("Date").split()) === date))
+  const todayUsage = total(normalRecords.filter(r => (r.get("Date") ? r.get("Date").split('T')[0] : r.get("Date")) === date))
   const totalUsage = total(normalRecords)
   const dayNumber =
     Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1
