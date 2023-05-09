@@ -34,14 +34,22 @@ fastify.get("/", function (request, reply) {
 });
 
 // A POST route to handle form submissions
-fastify.post("/line-webhook", function (request, reply) {
+fastify.post("/line-webhook", async function (request, reply) {
+  if(request.query.apiKey !== process.env.API_KEY){
+    console.warn('request is not from line.')
+    return 'Request is not from LINE!!'
+  }
   for(const event of request.body.events){
     if(event.type === 'message'){
+      if(event.source.userId != 'U54c0eb393189972c8b46b56df28a39aa'){
+        console.warn('receive message ifrom unkown user')
+        continue
+      }
       console.log(event);
-      axios.post('https://api.line.me/v2/bot/message/reply',{
+      await axios.post('https://api.line.me/v2/bot/message/reply',{
         replyToken : event.replyToken,
         messages : [
-          { type : 'text', text : 'Hi'}
+          { type : 'text', text : await getReply(event.message)}
         ]
       },{
         headers : {
@@ -50,7 +58,16 @@ fastify.post("/line-webhook", function (request, reply) {
       })
     }
   }
+  return 'ok';
 });
+
+async function getReply(message){
+  try{
+      return String(eval(message.text))
+  }catch(error){
+      return String(error)
+  }
+}
 
 // Run the server and report out to the logs
 fastify.listen(
