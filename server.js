@@ -50,9 +50,34 @@ fastify.post("/webhook", async function (request, reply) {
 async function handleMessageEvent(event){
   const { replyToken, message } = event
   if(event.source.userId !== process.env.LINE_USER_ID){
-    console.warn('receive message ifrom unkown user')
-    return
+    await replyMessage(event.replyToken,'unauthorized')
+    return 
   }
+  
+  if (message.type === 'text') {
+      const reply = await handleTextMessage(context, message.text, {
+        source: 'line',
+      })
+      await client.replyMessage(replyToken, toMessages(reply))
+  }
+}
+
+async function replyMessage(replyToken,message){
+  console.warn(message)
+  await axios.post('https://api.line.me/v2/bot/message/reply',{
+        replyToken : replyToken,
+        messages : [
+          {
+            type : 'text',
+            text : message
+          }
+        ]
+    },{
+      headers : {
+        authorization : `Bearer ${channelAccessToken}`
+      }
+    }
+  )
 }
 
 // Run the server and report out to the logs
