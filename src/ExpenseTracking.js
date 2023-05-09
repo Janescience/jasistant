@@ -33,10 +33,10 @@ export async function recordExpense(amount, category, remarks = "") {
     action: {
       type: "uri",
       label: "Open Airtable",
-      uri: context.secrets.AIRTABLE_EXPENSE_URI + "/" + record.getId()
+      uri: process.env.AIRTABLE_EXPENSE_URI + "/" + record.getId()
     }
   }
-  const footer = await getExpensesSummaryData(context)
+  const footer = await getExpensesSummaryData();
   const bubble = createBubble("expense tracking", body, {
     headerColor: "#ffffbb",
     footer: {
@@ -66,20 +66,20 @@ export async function recordExpense(amount, category, remarks = "") {
       action: {
         type: "uri",
         label: "Open Airtable",
-        uri: context.secrets.AIRTABLE_EXPENSE_URI
+        uri: process.env.AIRTABLE_EXPENSE_URI
       }
     }
   })
   return bubble
 }
-function getExpensesTable(context) {
-  return new Airtable({ apiKey: context.secrets.AIRTABLE_API_KEY })
-    .base(context.secrets.AIRTABLE_EXPENSE_BASE)
-    .table("Expense records")
+function getExpensesTable() {
+  return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
+    .base(process.env.AIRTABLE_EXPENSE_BASE)
+    .table("Expense Records")
 }
-async function getExpensesSummaryData(context) {
+async function getExpensesSummaryData() {
   const date = new Date().toJSON().split("T")[0]
-  const tableData = await getExpensesTable(context)
+  const tableData = await getExpensesTable()
     .select()
     .all()
   const normalRecords = tableData.filter(r => !r.get("Occasional"))
@@ -95,7 +95,7 @@ async function getExpensesSummaryData(context) {
   const [
     pacemakerPerDay,
     pacemakerBase
-  ] = context.secrets.EXPENSE_PACEMAKER.split("/")
+  ] = process.env.EXPENSE_PACEMAKER.split("/")
   const pacemaker = +pacemakerBase + +pacemakerPerDay * dayNumber - totalUsage
   const $ = v => `฿${v.toFixed(2)}`
   return [
