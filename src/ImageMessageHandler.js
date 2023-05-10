@@ -1,6 +1,5 @@
-import { ref } from './PersistentState'
-import vision from '@google-cloud/vision'
-import { getBlob } from './TemporaryBlobStorage'
+const vision = require('@google-cloud/vision')
+const { getBlob } =  require('./TemporaryBlobStorage')
 const { TextMessage } = require('@line/bot-sdk')
 
 const ImageMessageHandler = (text) => {
@@ -9,7 +8,6 @@ const ImageMessageHandler = (text) => {
     return async () => {
       const blobName = text.slice(6)
       const buffer = await getBlob(blobName)
-      await ref(context, 'latestImage').set(blobName)
       const imageAnnotator = new vision.ImageAnnotatorClient()
       const results = await imageAnnotator.documentTextDetection(buffer)
       const fullTextAnnotation = results[0].fullTextAnnotation
@@ -54,8 +52,8 @@ const ImageMessageHandler = (text) => {
       const responses = blocksToResponses(blocks)
       
       return [
-        { type: 'text', text: blobName } as TextMessage,
-        ...responses.map((r): TextMessage => ({ type: 'text', text: r })),
+        { type: 'text', text: blobName },
+        ...responses.map((r) => ({ type: 'text', text: r })),
       ]
     }
   }
