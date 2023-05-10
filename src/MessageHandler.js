@@ -1,5 +1,6 @@
 
 const { recordExpense } = require("./ExpenseTracking")
+const { putBlob } = require("./TemporaryBlobStorage")
 
 const handleTextMessage = async (message) =>{
   message = message.trim()
@@ -34,8 +35,14 @@ const handleTextMessage = async (message) =>{
   }
 }
 
+const handleImage = async (imageBuffer) => {
+  const blobName = await putBlob(imageBuffer, ".jpg")
+  return await handleTextMessage("image:" + blobName)
+}
+
 const handler = {
-  handleTextMessage
+  handleTextMessage,
+  handleImage
 };
 
 module.exports = handler;

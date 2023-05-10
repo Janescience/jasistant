@@ -1,7 +1,7 @@
 const path = require("path");
 const axios = require("axios");
 
-const { handleTextMessage } = require('./src/MessageHandler')
+const { handleImage, handleTextMessage } = require('./src/MessageHandler')
 const { toMessages } = require('./src/LineMessageUtility')
 
 const { Client } =  require('@line/bot-sdk')
@@ -67,16 +67,35 @@ async function handleMessageEvent(event,client){
     }
 
     if (message.type === 'text') {
-        const reply = await handleTextMessage(message.text)
-        console.log('reply : ',reply)
-        await client.replyMessage(replyToken, toMessages(reply))
+      const reply = await handleTextMessage(message.text)
+      await client.replyMessage(replyToken, toMessages(reply))
+    }else if (message.type === 'image') {
+      const content = await client.getMessageContent(message.id)
+      const buffer = await readAsBuffer(content)
+      const reply = await handleImage(buffer)
+      await client.replyMessage(replyToken, toMessages(reply))
     }
   }catch(error){
     await client.replyMessage(replyToken, toMessages(error))
   }
 }
 
-function getLineConfig(req, res) {
+const readAsBuffer = (stream) => {
+  return new Promise((resolve, reject) => {
+    stream.on("error", e => {
+      reject(e)
+    })
+    const bufs = []
+    stream.on("end", () => {
+      resolve(Buffer.concat(bufs))
+    })
+    stream.on("data", buf => {
+      bufs.push(buf)
+    })
+  })
+}
+
+const getLineConfig = (req, res) => {
   return {
     channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.LINE_CHANNEL_SECRET
