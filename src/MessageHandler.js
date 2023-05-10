@@ -7,6 +7,7 @@ const handleTextMessage = async (message) =>{
   
   if (match = message.match(/^([\d.]+|[ivxlcdm]+)([tfedcaghmol])([ \w]+|)$/i)) {
     const m = match
+    
     const enteredAmount = +m[1]
     const amount = enteredAmount.toFixed(2)
     const category = {
@@ -21,9 +22,13 @@ const handleTextMessage = async (message) =>{
       m: "miscellaneous",
       o: "occasion",
       l: "lodging"
-    }[m[3].toLowerCase()]
-    const name = m[4] ? m[4] : ""
-    return await recordExpense(name,amount, category)
+    }[m[2].toLowerCase()]
+    const name = m[3] ? m[3] : ""
+    if(category){
+      return await recordExpense(name,amount, category)
+    }else{
+      return 'Category not found.'
+    }
   }else{
     return 'The message does not match any conditions.'
   }
