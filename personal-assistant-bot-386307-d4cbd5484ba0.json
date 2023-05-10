@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "personal-assistant-bot-386307",
+  "private_key_id": "d4cbd5484ba02bbe0cbb7ab73d5e13b7841932f5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzFbUqcnPoYujo\nxANm8NPXtas5sjugv4i2zrop4FSs3UBgwus/yY59rBw65nS16HTteZglqQOi4km1\nwovj/2ihvhPFv94PVbmmQj/nvorZdy6VGJencObC9mjNYceEkj34DO3zSFm/YHEw\nASz7dZGH8Ef7qfrDuKw8qs0jyBY0mMUpc7HAmhFfHLG4qVkP3PplbCOuH/jtg9SG\nz77wC8e3T/3pj7f5PrcrVSgKsjxgEtVYnTPUsNQpwkVT+kga3agrP+VmkC24/qGT\n44hgxR9fhS0rcx2o3ad8Zc6TewriqsK4s8u5uGi3uRqtMd8DJ1S92O0uAR5DVKgx\ns/G27+w5AgMBAAECggEABReXbKsPd6qkU8YLELjFVUthoITcZDA+C3CqY3lw/u9V\nnsq8FLa++fzUWqpl5CxFcuEzvdJl+5IypVvwTV3cVEkK1+MiRc5atosItSa6XP+i\nD/RAj67KqP2HsltW6IKeB3kapQHIJ4RvA33tEQNhTXu8GEBXlIwiPaFfruZIF1u6\nYWIJvcW9dhdk/XngZKYlbc5qojKBSBbbEqVN6jhHzaP/7RGO4g55Yml/sLawTPZN\ncf1MLkToO9M02xBosCSnbNyL3uoXB2rUpXIoWxZBh72vB1lhNN3nax9f/cE9xIIZ\nElEmIoh4KW4F/8xs17x1cEbAzPP19vBpCkMFrSXhJwKBgQD5rCL7eZEi3LJk/eIA\n1/MauW0gsp62b0t1fPlEmF0BJ77UOEjlV4AQKqxcXJJ0u9irKaORGOfVcaE6v5Kt\ndYJ4DPR7R1/PZboZ7YNY5vM/frZuLW/52FV2JNP5Xn6gmf0X51eldrK2qNuHvcBv\nTvoJVoImQJuV0Rk+f9jID71xdwKBgQC3n5oNvkecln3u622WYKPet3z+XV3AP2uo\nq/VPelfh1zxS9u2sJpta19/wH9G/lZUez1QBce76ooAmOUnCRY7mjSktEEn/MQL+\nKtVByC1rYkFH0GqB869f1xU3nnVwtM/LUaOF2bWUH7zAOaLw4jmiZiUa54WwtgtV\ni6g0aet7zwKBgQDjidRr2NPDsNzIG3TwDd7ZeSoSRZdNbkqX7WiC8lS4a8+HOzB8\nCu2ETk+88QTsbBG/k/gkkU0fgipNDzCO8uwPmsbo3xhbPDuJy6MLz5baRBHggXpu\neZERVej1d//xP8WgFk8TVgTzYRqJMA6DordO8U81q2Xf+KuIAR3A3k9pawKBgG1+\n1rZrSPivJNlbujV52z3r3LUxp74EE4a5Q8bpBY6+clJmvMNzIiDBqd/emYzM/ecp\nasaR0hfS3ufsMXePUu9YLb2ZgQaTi11U3WYkoDDwnkzckyZ60ZEtCJHqA835hA+R\n1xjyAb0aT8uwkuFhhUy57FZmyOnfJFMWvG7E2o8xAoGANTJsRZjM6d9v4pafTroi\nsYKV9/dipDe8b+pbzZaj+/ix0ufKGIIFGbnkRgPEw4Vv6DvQUjaWV+lvfjpObmJa\n1Ho7TZ3VP/n2MDDz93g28gwVCEFRUlMzyJeplUByXhnUEjWFaSYd/kjGAgKO6lzD\ny+HVPIUGjg3UVNv5LYcQFlU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "assistant-storage@personal-assistant-bot-386307.iam.gserviceaccount.com",
+  "client_id": "117127222348936198410",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/assistant-storage%40personal-assistant-bot-386307.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
