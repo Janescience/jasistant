@@ -60,7 +60,7 @@ async function handleWebhook(events, client) {
 
 async function handleMessageEvent(event,client){
   const { replyToken, message } = event
-  try{
+  
     if(event.source.userId !== process.env.LINE_USER_ID){
       await client.replyMessage(replyToken,toMessages('unauthorized'))
       return 
@@ -75,9 +75,7 @@ async function handleMessageEvent(event,client){
       const reply = await handleImage(buffer)
       await client.replyMessage(replyToken, toMessages(reply))
     }
-  }catch(error){
-    await client.replyMessage(replyToken, toMessages(error))
-  }
+
 }
 
 const readAsBuffer = (stream) => {
