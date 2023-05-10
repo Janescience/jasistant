@@ -8,7 +8,7 @@ const ImageMessageHandler = (text) => {
     return async () => {
       const blobName = text.slice(6)
       const buffer = await getBlob(blobName)
-      const imageAnnotator = new vision.ImageAnnotatorClient()
+      const imageAnnotator = new vision.ImageAnnotatorClient({keyFilename:'../personal-assistant-bot-386307-622f3c38f621.json'})
       const results = await imageAnnotator.documentTextDetection(buffer)
       const fullTextAnnotation = results[0].fullTextAnnotation
       

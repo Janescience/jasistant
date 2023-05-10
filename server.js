@@ -99,23 +99,6 @@ const getLineConfig = (req, res) => {
     channelSecret: process.env.LINE_CHANNEL_SECRET
   }
 }
-const projectId = 'personal-assistant-bot-386307';
-const {Storage} = require('@google-cloud/storage');
-
-async function authenticateImplicitWithAdc() {
-  const storage = new Storage({
-    projectId
-  });
-  const [buckets] = await storage.getBuckets();
-  console.log('Buckets:');
-
-  for (const bucket of buckets) {
-    console.log(`- ${bucket.name}`);
-  }
-
-  console.log('Listed all storage buckets.');
-}
-
 
 
 // Run the server and report out to the logs
@@ -126,7 +109,6 @@ fastify.listen(
       console.error(err);
       process.exit(1);
     }
-    authenticateImplicitWithAdc();
     console.log(`Your app is listening on ${address}`);
   }
 );
