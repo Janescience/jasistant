@@ -1,7 +1,7 @@
 import { ref } from './PersistentState'
-import { TextMessage, TextMessageHandler } from './types'
 import vision from '@google-cloud/vision'
 import { getBlob } from './TemporaryBlobStorage'
+const { TextMessage } = require('@line/bot-sdk')
 
 const ImageMessageHandler = (text) => {
   
@@ -13,7 +13,9 @@ const ImageMessageHandler = (text) => {
       const imageAnnotator = new vision.ImageAnnotatorClient()
       const results = await imageAnnotator.documentTextDetection(buffer)
       const fullTextAnnotation = results[0].fullTextAnnotation
-      const blocks: string[] = []
+      
+      let blocks = []
+      
       for (const page of fullTextAnnotation.pages) {
         blocks.push(
           ...page.blocks.map((block) => {
@@ -27,10 +29,14 @@ const ImageMessageHandler = (text) => {
           })
         )
       }
-      const blocksToResponses = (blocks: string[]) => {
+      
+      const blocksToResponses = (blocks) => {
+        
         if (blocks.length <= 4) return blocks
+        
         let processedIndex = 0
         const outBlocks = []
+        
         for (let i = 0; i < 4; i++) {
           const targetIndex = Math.ceil(((i + 1) * blocks.length) / 4)
           outBlocks.push(
@@ -41,9 +47,12 @@ const ImageMessageHandler = (text) => {
           )
           processedIndex = targetIndex
         }
+        
         return outBlocks
       }
+      
       const responses = blocksToResponses(blocks)
+      
       return [
         { type: 'text', text: blobName } as TextMessage,
         ...responses.map((r): TextMessage => ({ type: 'text', text: r })),
@@ -53,8 +62,7 @@ const ImageMessageHandler = (text) => {
 }
 
 const handler = {
-  handleTextMessage,
-  handleImage
+  ImageMessageHandler
 };
 
 module.exports = handler;
