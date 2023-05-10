@@ -2,7 +2,7 @@ const Airtable  = require("airtable")
 const { AirtableRecord } = require('airtable')
 const { createBubble } = require("./LineMessageUtility")
 
-const recordExpense= async (name,amount, category, remarks = "") => {
+const recordExpense= async (name,amount, category) => {
   const date = new Date()
   // Airtable
   const table = getExpensesTable()
@@ -12,7 +12,6 @@ const recordExpense= async (name,amount, category, remarks = "") => {
       Date: date,
       Category: category,
       Amount: amount,
-      Remarks : remarks,
     },
     { typecast: true }
   )
@@ -75,13 +74,13 @@ const recordExpense= async (name,amount, category, remarks = "") => {
   return bubble
 }
 
-function getExpensesTable() {
+const getExpensesTable = () => {
   return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     .base(process.env.AIRTABLE_EXPENSE_BASE)
     .table("Expense Records")
 }
 
-async function getExpensesSummaryData() {
+const getExpensesSummaryData = async () => {
   const date = new Date().toJSON().split("T")[0]
   const tableData = await getExpensesTable()
     .select()
@@ -95,19 +94,20 @@ async function getExpensesSummaryData() {
     .reduce((a, b) => (a < b ? a : b), date)
   const todayUsage = total(normalRecords.filter(r => (r.get("Date") ? r.get("Date").split('T')[0] : r.get("Date")) === date))
   const totalUsage = total(normalRecords)
-  const dayNumber =
-    Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1
+  const dayNumber = Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1
   const [
     pacemakerPerDay,
     pacemakerBase
   ] = process.env.EXPENSE_PACEMAKER.split("/")
   const pacemaker = +pacemakerBase + +pacemakerPerDay * dayNumber - totalUsage
   const $ = v => `฿${v.toFixed(2)}`
+  
   return [
     ["today", $(todayUsage)],
     ["pace", $(pacemaker)],
     ["day", `${dayNumber}`]
   ]
+  
 }
 
 const expenseTracking = {
