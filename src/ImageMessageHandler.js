@@ -51,10 +51,8 @@ const ImageMessageHandler = (text) => {
       
       const responses = blocksToResponses(blocks)
       
-      return [
-        { type: 'text', text: blobName },
-        ...responses.map((r) => ({ type: 'text', text: r })),
-      ]
+      return responses.map((r) => ({ type: 'text', text: r }))
+      
     }
   }
 }
