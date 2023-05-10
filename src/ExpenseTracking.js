@@ -1,20 +1,20 @@
-const Airtable  = require("airtable")
-const { AirtableRecord } = require('airtable')
-const { createBubble } = require("./LineMessageUtility")
+const Airtable = require("airtable");
+const { AirtableRecord } = require("airtable");
+const { createBubble } = require("./LineMessageUtility");
 
-const recordExpense= async (name,amount, category) => {
-  const date = new Date()
+const recordExpense = async (name, amount, category) => {
+  const date = new Date();
   // Airtable
-  const table = getExpensesTable()
+  const table = getExpensesTable();
   const record = await table.create(
     {
-      Name : name.trim(),
+      Name: name.trim(),
       Date: date,
       Category: category,
       Amount: amount,
     },
     { typecast: true }
-  )
+  );
   const body = {
     type: "box",
     layout: "vertical",
@@ -23,20 +23,20 @@ const recordExpense= async (name,amount, category) => {
         type: "text",
         text: "฿" + amount,
         size: "xxl",
-        weight: "bold"
+        weight: "bold",
       },
       {
         type: "text",
-        text: `${category}${name?'/'+name.trim():''}\nrecorded`,
-        wrap: true
-      }
+        text: `${category}${name ? "/" + name.trim() : ""}\nrecorded`,
+        wrap: true,
+      },
     ],
     action: {
       type: "uri",
       label: "Open Airtable",
-      uri: process.env.AIRTABLE_EXPENSE_URI + "/" + record.getId()
-    }
-  }
+      uri: process.env.AIRTABLE_EXPENSE_URI + "/" + record.getId(),
+    },
+  };
   const footer = await getExpensesSummaryData();
   const bubble = createBubble("Expense Tracking", body, {
     headerColor: "#ffffbb",
@@ -53,65 +53,66 @@ const recordExpense= async (name,amount, category) => {
             text: label,
             color: "#8b8685",
             size: "xs",
-            align: "end"
+            align: "end",
           },
           {
             type: "text",
             text: text,
             color: "#8b8685",
             size: "sm",
-            align: "end"
-          }
-        ]
+            align: "end",
+          },
+        ],
       })),
       action: {
         type: "uri",
         label: "Open Airtable",
-        uri: process.env.AIRTABLE_EXPENSE_URI
-      }
-    }
-  })
-  return bubble
-}
+        uri: process.env.AIRTABLE_EXPENSE_URI,
+      },
+    },
+  });
+  return bubble;
+};
 
 const getExpensesTable = () => {
   return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     .base(process.env.AIRTABLE_EXPENSE_BASE)
-    .table("Expense Records")
-}
+    .table("Expense Records");
+};
 
 const getExpensesSummaryData = async () => {
-  const date = new Date().toJSON().split("T")[0]
-  const tableData = await getExpensesTable()
-    .select()
-    .all()
-  const normalRecords = tableData.filter(r => !r.get("Occasional"))
+  const date = new Date().toJSON().split("T")[0];
+  const tableData = await getExpensesTable().select().all();
+  const normalRecords = tableData.filter((r) => !r.get("Occasional"));
   const records = AirtableRecord;
-  const total = records =>
-    records.map(r => +r.get("Amount") || 0).reduce((a, b) => a + b, 0)
+  const total = (records) =>
+    records.map((r) => +r.get("Amount") || 0).reduce((a, b) => a + b, 0);
   const firstDate = normalRecords
-    .map(r => (r.get("Date") ? r.get("Date").split('T')[0] : r.get("Date")))
-    .reduce((a, b) => (a < b ? a : b), date)
-  const todayUsage = total(normalRecords.filter(r => (r.get("Date") ? r.get("Date").split('T')[0] : r.get("Date")) === date))
-  const totalUsage = total(normalRecords)
-  const dayNumber = Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1
-  const [
-    pacemakerPerDay,
-    pacemakerBase
-  ] = process.env.EXPENSE_PACEMAKER.split("/")
-  const pacemaker = +pacemakerBase + +pacemakerPerDay * dayNumber - totalUsage
-  const $ = v => `฿${v.toFixed(2)}`
-  
+    .map((r) => (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")))
+    .reduce((a, b) => (a < b ? a : b), date);
+  const todayUsage = total(
+    normalRecords.filter(
+      (r) =>
+        (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")) === date
+    )
+  );
+  const totalUsage = total(normalRecords);
+  const dayNumber =
+    Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1;
+  const [pacemakerPerDay, pacemakerBase] =
+    process.env.EXPENSE_PACEMAKER.split("/");
+  const pacemaker = +pacemakerBase + +pacemakerPerDay * dayNumber - totalUsage;
+  const $ = (v) => `฿${v.toFixed(2)}`;
+
   return [
-    ["today", $(todayUsage)],
-    ["pace", $(pacemaker)],
-    ["day", `${dayNumber}`]
-  ]
-  
-}
+    ["today", $(todayUsage)], //รายจ่ายรวมทั้งหมดของวันนี้
+    ["pace", $(pacemaker)], //งบทั้งหมดที่มี
+    ["day", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
+  ];
+};
 
 const expenseTracking = {
-  recordExpense
+  recordExpense,
 };
 
 module.exports = expenseTracking;

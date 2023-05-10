@@ -1,8 +1,9 @@
 const path = require("path");
 const axios = require("axios");
-const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN
+
 const { handleTextMessage } = require('./src/MessageHandler')
 const { toMessages } = require('./src/LineMessageUtility')
+
 const { Client } =  require('@line/bot-sdk')
 
 // Require the fastify framework and instantiate it
@@ -59,15 +60,19 @@ async function handleWebhook(events, client) {
 
 async function handleMessageEvent(event,client){
   const { replyToken, message } = event
-  if(event.source.userId !== process.env.LINE_USER_ID){
-    await client.replyMessage(event.replyToken,toMessages('unauthorized'))
-    return 
-  }
+  try{
+    if(event.source.userId !== process.env.LINE_USER_ID){
+      await client.replyMessage(replyToken,toMessages('unauthorized'))
+      return 
+    }
 
-  if (message.type === 'text') {
-      const reply = await handleTextMessage(message.text)
-      console.log('reply : ',reply)
-      await client.replyMessage(replyToken, toMessages(reply))
+    if (message.type === 'text') {
+        const reply = await handleTextMessage(message.text)
+        console.log('reply : ',reply)
+        await client.replyMessage(replyToken, toMessages(reply))
+    }
+  }catch(error){
+    await client.replyMessage(replyToken, toMessages(error))
   }
 }
 
