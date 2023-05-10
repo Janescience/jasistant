@@ -1,6 +1,11 @@
 
 const { recordExpense } = require("./ExpenseTracking")
 const { putBlob } = require("./TemporaryBlobStorage")
+const { ImageMessageHandler } = require("./ImageMessageHandler")
+
+const messageHandlers = [
+  ImageMessageHandler,
+]
 
 const handleTextMessage = async (message) =>{
   message = message.trim()
@@ -32,6 +37,14 @@ const handleTextMessage = async (message) =>{
     }
   }else{
     return 'The message does not match any conditions.'
+  }
+  
+  // Go through message handlers and see if any of them can handle the message
+  for (const handler of messageHandlers) {
+    const action = handler(message)
+    if (action) {
+      return action()
+    }
   }
 }
 
