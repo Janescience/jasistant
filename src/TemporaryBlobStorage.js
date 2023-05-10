@@ -1,13 +1,13 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
-
-const storage = new Storage()
+const projectId = 'personal-assistant-bot-386307'
+const storage = new Storage({projectId})
 let latest
 
 const putBlob = async (buffer, extension) => {
   const blobName = nanoid() + extension
   await storage
-    .bucket("tmpblob")
+    .bucket("tmpblobimg")
     .file(blobName)
     .save(buffer)
   latest = { blobName, buffer }
@@ -19,7 +19,7 @@ const getBlob = async (blobName) => {
     return latest.buffer
   }
   const response = await storage
-    .bucket("tmpblob")
+    .bucket("tmpblobimg")
     .file(blobName)
     .download()
   return response[0]
@@ -27,7 +27,7 @@ const getBlob = async (blobName) => {
 
 const getBlobUrl = async (blobName) => {
   const result = await storage
-    .bucket("tmpblob")
+    .bucket("tmpblobimg")
     .file(blobName)
     .getSignedUrl({
       action: "read",
