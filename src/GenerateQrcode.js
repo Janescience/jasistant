@@ -10,17 +10,12 @@ const generateQrcode = async (amount) => {
   const options = { type: 'svg', color: { dark: '#003b6a', light: '#f7f8f7' } }
   
   // const imageUrl = 'data:image/svg+xml,<svg>...</svg>';
-  const previewUrl = 'data:image/png;base64,iVBORw0KG...';
+  // const previewUrl = 'data:image/png;base64,iVBORw0KG...';
   
-  const imageUrl =  await new Promise((resolve, reject) => {
-    qrcode.toString(payload, options, (err, svg) => {
-      if (err) return reject(err)
-         resolve(svg)
-    })
-  })
+  const qrSvg =  await qrcode.toString(payload, options)
+  const imageUrl = 'data:image/svg+xml,'+qrSvg
   
   const previewUrl =  await qrcode.toDataURL(payload)
-
 
   const message = {
     type: 'image',
@@ -28,13 +23,8 @@ const generateQrcode = async (amount) => {
     previewImageUrl: previewUrl
   };
 
-
   // const urls = svgToDataURL(qr)
-  return {
-    "type": "image",
-    "originalContentUrl": qr,
-    "previewImageUrl": qr
-  }
+  return message;
 }
 
 module.exports = generateQrcode;
