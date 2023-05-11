@@ -10,21 +10,21 @@ const generateQrcode = async (amount) => {
   
   const options = { type: 'svg', color: { dark: '#000', light: '#fff' } }
   
-  qrcode.toString(payload, options, (err, svg) => {
+  await qrcode.toString(payload, options,async (err, svg) => {
       if (err) return console.log(err)
-      fs.writeFileSync('./qr.svg', svg)
+      await fs.writeFileSync('/assets/qr.svg', svg)
       console.log(svg)
   })
 
-//   const message = {
-//     type: 'image',
-//     originalContentUrl: encodeURIComponent(imageUrl),
-//     previewImageUrl: encodeURIComponent(previewUrl)
-//   };
+  const message = {
+    type: 'image',
+    originalContentUrl: "https://cdn.glitch.global/ba0e9e44-2f43-477c-bf01-d31d36d6c61d/profile.jpeg?v=1683800729902",
+    previewImageUrl: "https://cdn.glitch.global/ba0e9e44-2f43-477c-bf01-d31d36d6c61d/profile.jpeg?v=1683800729902"
+  };
 
   // const urls = svgToDataURL(qr)
-  // return message;
-  return 
+  return message;
+  // return "Send"
 }
 
 module.exports = generateQrcode;

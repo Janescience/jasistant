@@ -69,16 +69,8 @@ async function handleMessageEvent(event,client){
     if (message.type === 'text') {
       const reply = await handleTextMessage(message.text)
       console.log(reply)
-      // await client.replyMessage(replyToken,reply)
-      await client.replyMessage(replyToken, reply)
-        .then(() => console.log('Message sent!'))
-        .catch((err) => {
-          console.error(err);
-          console.error(`Error status: ${err.originalError.response.status}`);
-          console.error(`Error message: ${err.originalError.response.data.message}`);
-          console.error(`Error details: ${JSON.stringify(err.originalError.response.data.details, null, 2)}`);
+      await client.replyMessage(replyToken,toMessages(reply))
 
-        });
     }else if (message.type === 'image') {
       const content = await client.getMessageContent(message.id)
       const buffer = await readAsBuffer(content)
