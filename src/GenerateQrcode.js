@@ -16,44 +16,7 @@ const generateQrcode = async (amount) => {
     })
   })
   const url = svgToDataURL(qr)
-  const body = {
-    type: "box",
-    layout: "horizontal",
-    contents: [
-      {
-        type: "image",
-        url: url,
-        size: "md",
-      }
-    ],
-    action: {
-      type: "uri",
-      label: "Open Airtable",
-      uri: process.env.AIRTABLE_EXPENSE_URI,
-    },
-  };
-  const bubble = createBubble("Expense Tracking", body, {
-    headerColor: "#ffffbb"
-  });
-  return bubble;
-  // return {
-  //   type: "flex",
-  //   contents:{
-  //     type:"bubble",
-  //     body:{
-  //       type: "box",
-  //       layout: "horizontal",
-  //       contents: [
-  //         {
-  //           type: "image",
-  //           url: "https://example.com/flex/images/image.jpg",
-  //           size: "md",
-  //         }
-  //       ]
-  //     }
-  //   }
-  // }
-  
+
 }
 
 module.exports = generateQrcode;
