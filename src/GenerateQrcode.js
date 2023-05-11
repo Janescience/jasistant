@@ -1,6 +1,7 @@
 const qrcode = require('qrcode')
 const generatePayload = require('promptpay-qr')
 const fs = require('fs') 
+const path = require('path')
 const { createBubble } = require("./LineMessageUtility");
 
 const generateQrcode = async (amount) => {
@@ -13,16 +14,28 @@ const generateQrcode = async (amount) => {
   await qrcode.toString(payload, options,async (err, svg) => {
       if (err) return console.log(err)
       // await fs.writeFileSync('./qr.svg', svg)
-    await fs.writeFile("qr.svg", svg, (err) => {
-      if (err)
-        console.log(err);
-      else {
-        console.log("File written successfully\n");
-        console.log("The written has the following contents:");
-        console.log(fs.readFileSync("qr.svg", "utf8"));
+    // await fs.writeFile("qr.svg", svg, (err) => {
+    //   if (err)
+    //     console.log(err);
+    //   else {
+    //     console.log("File written successfully\n");
+    //     console.log("The written has the following contents:");
+    //     console.log(fs.readFileSync("qr.svg", "utf8"));
+    //   }
+    // });
+    
+    const fileName = "qr.svg";
+    const fileContent = svg;
+    
+    fs.writeFile(fileName, fileContent, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const fileUrl = `https://${process.env.PROJECT_DOMAIN}.glitch.me/${fileName}`;
+        console.log(`File uploaded successfully. URL: ${fileUrl}`);
       }
     });
-      console.log(svg)
+      // console.log(svg)
   })
 
   const message = {
