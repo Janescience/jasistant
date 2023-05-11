@@ -76,6 +76,8 @@ async function handleMessageEvent(event,client){
           console.error(err);
           console.error(`Error status: ${err.originalError.response.status}`);
           console.error(`Error message: ${err.originalError.response.data.message}`);
+          console.error(`Error details: ${JSON.stringify(err.originalError.response.data.details, null, 2)}`);
+
         });
     }else if (message.type === 'image') {
       const content = await client.getMessageContent(message.id)

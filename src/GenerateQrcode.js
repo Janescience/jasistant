@@ -13,14 +13,14 @@ const generateQrcode = async (amount) => {
   // const previewUrl = 'data:image/png;base64,iVBORw0KG...';
   
   const qrSvg =  await qrcode.toString(payload, options)
-  const imageUrl = 'data:image/svg+xml,'+qrSvg
+  const imageUrl = svgToDataURL(qrSvg);
   
   const previewUrl =  await qrcode.toDataURL(payload)
 
   const message = {
     type: 'image',
-    originalContentUrl: imageUrl,
-    previewImageUrl: previewUrl
+    originalContentUrl: encodeURIComponent(imageUrl),
+    previewImageUrl: encodeURIComponent(previewUrl)
   };
 
   // const urls = svgToDataURL(qr)
