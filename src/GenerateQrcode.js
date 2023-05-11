@@ -1,5 +1,6 @@
 const qrcode = require('qrcode')
 const generatePayload = require('promptpay-qr')
+const svgToDataURL = require('svg-to-dataurl')
 const { createBubble } = require("./LineMessageUtility");
 
 const generateQrcode = async (amount) => {
@@ -14,25 +15,30 @@ const generateQrcode = async (amount) => {
          resolve(svg)
     })
   })
-  const b64 = 'data:image/svg+xml;base64,'+window.btoa(qr);
-  const body = {
-    type: "box",
-    layout: "horizontal",
-    contents: [
-      {
-        type: "image",
-        url: b64,
-        size: "xl",
-      },
-      {
-        type: "text",
-        text: `${amount} บาท`,
-        wrap: true,
-      },
-    ]
-  };
-  const bubble = createBubble("QRCode", body) 
-  return bubble;
+  const url = svgToDataURL(qr)
+  return {
+    type: "flex",
+    contents:{
+      type:"bubble",
+      body:{
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "image",
+            url: url,
+            size: "md",
+          },
+          {
+            type: "text",
+            text: `${amount} บาท`,
+            wrap: true,
+          },
+        ]
+      }
+    }
+  }
+  
 }
 
 module.exports = generateQrcode;

@@ -19,7 +19,8 @@
     "@google-cloud/storage": "^6.10.0",
     "nanoid": "^3.3.6",
     "promptpay-qr": "^0.5.0",
-    "qrcode": "^1.5.3"
+    "qrcode": "^1.5.3",
+    "svg-to-dataurl": "^1.0.0"
   },
   "engines": {
     "node": "14.x"
