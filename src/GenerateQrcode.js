@@ -9,17 +9,19 @@ const generateQrcode = async (amount) => {
   const payload = generatePayload(mobileNumber, { amount })
   const options = { type: 'svg', color: { dark: '#003b6a', light: '#f7f8f7' } }
 
-  const qr =  await new Promise((resolve, reject) => {
-    qrcode.toString(payload, options, (err, svg) => {
-      if (err) return reject(err)
-         resolve(svg)
-    })
-  })
-  const urls = svgToDataURL(qr)
+  // const qr =  await new Promise((resolve, reject) => {
+  //   qrcode.toString(payload, options, (err, svg) => {
+  //     if (err) return reject(err)
+  //        resolve(svg)
+  //   })
+  // })
+  const qr =  await qrcode.toDataURL(payload)
+  // const urls = svgToDataURL(qr)
+  
   return {
     "type": "image",
-    "originalContentUrl": urls,
-    "previewImageUrl": urls
+    "originalContentUrl": qr,
+    "previewImageUrl": qr
   }
 }
 
