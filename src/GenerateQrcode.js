@@ -24,7 +24,7 @@ const generateQrcode = async (amount) => {
     //   }
     // });
     
-    const fileName = "qr.svg";
+    const fileName = "./qr.svg";
     const fileContent = svg;
     
     fs.writeFile(fileName, fileContent, (err) => {

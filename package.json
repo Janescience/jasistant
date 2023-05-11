@@ -21,7 +21,8 @@
     "promptpay-qr": "^0.5.0",
     "qrcode": "^1.5.3",
     "svg-to-dataurl": "^1.0.0",
-    "fs": "^0.0.1"
+    "fs": "^0.0.1",
+    "glitch": "^0.1.0"
   },
   "engines": {
     "node": "14.x"
