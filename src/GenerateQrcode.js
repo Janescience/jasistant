@@ -12,7 +12,16 @@ const generateQrcode = async (amount) => {
   
   await qrcode.toString(payload, options,async (err, svg) => {
       if (err) return console.log(err)
-      await fs.writeFileSync('/assets/qr.svg', svg)
+      // await fs.writeFileSync('./qr.svg', svg)
+    await fs.writeFile("qr.svg", svg, (err) => {
+      if (err)
+        console.log(err);
+      else {
+        console.log("File written successfully\n");
+        console.log("The written has the following contents:");
+        console.log(fs.readFileSync("qr.svg", "utf8"));
+      }
+    });
       console.log(svg)
   })
 
@@ -23,8 +32,8 @@ const generateQrcode = async (amount) => {
   };
 
   // const urls = svgToDataURL(qr)
-  return message;
-  // return "Send"
+  // return message;
+  return "Send"
 }
 
 module.exports = generateQrcode;
