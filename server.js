@@ -68,6 +68,7 @@ async function handleMessageEvent(event,client){
 
     if (message.type === 'text') {
       const reply = await handleTextMessage(message.text)
+      console.log(reply)
       await client.replyMessage(replyToken, toMessages(reply))
     }else if (message.type === 'image') {
       const content = await client.getMessageContent(message.id)
