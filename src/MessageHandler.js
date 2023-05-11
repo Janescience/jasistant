@@ -1,5 +1,6 @@
 
 const { recordExpense } = require("./ExpenseTracking")
+const generateQrcode = require("./GenerateQrcode")
 const { putBlob } = require("./TemporaryBlobStorage")
 const { ImageMessageHandler } = require("./ImageMessageHandler")
 
@@ -35,8 +36,11 @@ const handleTextMessage = async (message) =>{
     }else{
       return 'Category not found.'
     }
-  }else if(){
-    
+  }else if(match = message.match(/^(qr)([\d.]+)$/i)){
+    const m = match
+    console.log(m)
+    const amount = Number(m[2])
+    return await generateQrcode(amount)
   }
   
   // Go through message handlers and see if any of them can handle the message
