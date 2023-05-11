@@ -17,7 +17,6 @@ const generateQrcode = async (amount) => {
   // })
   const qr =  await qrcode.toDataURL(payload)
   // const urls = svgToDataURL(qr)
-  
   return {
     "type": "image",
     "originalContentUrl": qr,
