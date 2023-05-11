@@ -35,6 +35,8 @@ const handleTextMessage = async (message) =>{
     }else{
       return 'Category not found.'
     }
+  }else if(){
+    
   }
   
   // Go through message handlers and see if any of them can handle the message
