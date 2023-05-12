@@ -1,7 +1,7 @@
 {
-  "name": "glitch-mvp-node",
-  "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running.",
+  "name": "jasistant",
+  "version": "1.0.0",
+  "description": "Personal assitants for backend line bot.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -20,19 +20,19 @@
     "nanoid": "^3.3.6",
     "promptpay-qr": "^0.5.0",
     "qrcode": "^1.5.3",
-    "svg-to-dataurl": "^1.0.0",
-    "fs": "^0.0.1",
-    "glitch": "^0.1.0"
+    "svg-to-dataurl": "^1.0.0"
   },
   "engines": {
     "node": "14.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-mvp-node"
+    "url": "https://github.com/Janescience/jasistant.git"
   },
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch"
+    "assitants",
+    "line",
+    "bot"
   ]
 }
