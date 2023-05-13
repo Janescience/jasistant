@@ -1,4 +1,4 @@
-const lineConfig = require("../config/line.config");
+const config = require("../config/line.config");
 const messageService = require("../services/message.service");
 const imageService = require("../services/image.service");
 
@@ -6,7 +6,7 @@ const { Client } =  require('@line/bot-sdk')
 const { toMessages,readAsBuffer } = require('../utilities/line.utility')
 
 exports.webhook = async (req, res) => {
-    const client = new Client(lineConfig())
+    const client = new Client(config())
     const events = req.body.events;
     let data;
     for (const event of events) {
