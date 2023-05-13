@@ -5,7 +5,7 @@ const imageService = async (buffer) => {
 
     //Upload image to google cloud storage(buckets)
     const blobName = await putBlob(buffer, ".jpg")
-    
+
     const blob = await getBlob(blobName)
     console.log('image blob : ',blob)
 
@@ -30,7 +30,6 @@ const imageService = async (buffer) => {
     }
         
     const responses = blocksToResponses(blocks)
-    
     return responses.map((r) => ({ type: 'text', text: r }))
 }
 
