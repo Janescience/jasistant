@@ -4,14 +4,13 @@ const { getBlob,putBlob } =  require('../utilities/storage.utility')
 const imageService = async (buffer) => {
 
     //Upload image to google cloud storage(buckets)
-    const text = await putBlob(buffer, ".jpg")
+    const blobName = await putBlob(buffer, ".jpg")
+    
+    const blob = await getBlob(blobName)
+    console.log('image blob : ',blob)
 
-  if (text.startsWith('image:')) {
-    const blobName = text.slice(6)
-    const buffer = await getBlob(blobName)
-    console.log('image buffer : ',buffer)
     const imageAnnotator = new vision.ImageAnnotatorClient()
-    const results = await imageAnnotator.documentTextDetection(buffer)
+    const results = await imageAnnotator.documentTextDetection(blob)
     const fullTextAnnotation = results[0].fullTextAnnotation
     
     let blocks = []
@@ -33,7 +32,6 @@ const imageService = async (buffer) => {
     const responses = blocksToResponses(blocks)
     
     return responses.map((r) => ({ type: 'text', text: r }))
-  }
 }
 
 const blocksToResponses = (blocks) => {
