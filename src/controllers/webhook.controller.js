@@ -28,17 +28,13 @@ const messageEvent = async (event,client) => {
     }
 
     if (message.type === 'text') {
-
         const reply = await messageService(message.text)
         console.log(reply)
         await client.replyMessage(replyToken,toMessages(reply))
-
     }else if (message.type === 'image') {
-
         const content = await client.getMessageContent(message.id)
         const buffer = await readAsBuffer(content)
         const reply = await imageService(buffer)
-
         await client.replyMessage(replyToken, toMessages(reply))
     }
   
