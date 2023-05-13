@@ -1,7 +1,9 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
+
 const projectId = 'personal-assistant-bot-386307'
 const storage = new Storage({projectId})
+
 let latest
 
 const putBlob = async (buffer, extension) => {
@@ -38,10 +40,10 @@ const getBlobUrl = async (blobName) => {
   return result[0]
 }
 
-const tempStorage = {
+const cloudStorage = {
   putBlob,
   getBlob,
   getBlobUrl
 };
 
-module.exports = tempStorage;
+module.exports = cloudStorage;

@@ -1,11 +1,11 @@
 const Airtable = require("airtable");
 const { AirtableRecord } = require("airtable");
-const { createBubble } = require("./LineMessageUtility");
+const { createBubble } = require("../utilities/line.utility");
 
-const recordExpense = async (name, amount, category) => {
+const expenseTracking = async (name, amount, category) => {
   const date = new Date();
   // Airtable
-  const table = getExpensesTable();
+  const table = expenseTable();
   const record = await table.create(
     {
       Name: name.trim(),
@@ -37,7 +37,7 @@ const recordExpense = async (name, amount, category) => {
       uri: process.env.AIRTABLE_EXPENSE_URI + "/" + record.getId(),
     },
   };
-  const footer = await getExpensesSummaryData();
+  const footer = await summary();
   const bubble = createBubble("Expense Tracking", body, {
     headerColor: "#ffffbb",
     footer: {
@@ -74,15 +74,15 @@ const recordExpense = async (name, amount, category) => {
   return bubble;
 };
 
-const getExpensesTable = () => {
+const expenseTable = () => {
   return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     .base(process.env.AIRTABLE_EXPENSE_BASE)
     .table("Expense Records");
 };
 
-const getExpensesSummaryData = async () => {
+const summary = async () => {
   const date = new Date().toJSON().split("T")[0];
-  const tableData = await getExpensesTable().select().all();
+  const tableData = await expenseTable().select().all();
   const normalRecords = tableData.filter((r) => !r.get("Occasional"));
   const records = AirtableRecord;
   const total = (records) =>
@@ -109,10 +109,6 @@ const getExpensesSummaryData = async () => {
     ["pace", $(pacemaker)], //งบทั้งหมดที่มี
     ["day", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
   ];
-};
-
-const expenseTracking = {
-  recordExpense,
 };
 
 module.exports = expenseTracking;

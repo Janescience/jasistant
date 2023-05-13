@@ -1,116 +1,49 @@
+const express = require('express');
+// const cors = require("cors")
 const path = require("path");
-const axios = require("axios");
+const dotenv = require('dotenv');
+dotenv.config();
+// Initialize Express App 
+const app = express();
+app.use(express.json({limit:'50mb'}))
+app.use(express.urlencoded({limit: '50mb', extended:true }))
+app.use(express.static(path.join(__dirname, '/public')))
 
-const { handleImage, handleTextMessage } = require('./src/MessageHandler')
-const { toMessages } = require('./src/LineMessageUtility')
+// const whitelist = ['https://cow-app.vercel.app','https://dairy-farm-app.onrender.com','http://localhost:5173','http://localhost:4000'];
+// const corsOption = {
+//   origin: (origin, callback) => {
+//     if(whitelist.indexOf(origin) !== -1 || !origin){
+//       callback(null,true)
+//     }else{
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   },
+//   optionsSuccessStatus : 200
+// }
 
-const { Client } =  require('@line/bot-sdk')
+// Routes Setup  
+require('./src/routes/webhook.routes')(app);
 
-// Require the fastify framework and instantiate it
-const fastify = require("fastify")({
-  // set this to true for detailed logging:
-  logger: true,
-});
+// basic route
+app.get(["/","/index.html"],(req,res) => {
+  res.sendFile(path.join(__dirname, 'views','index.html'));
+})
 
-// Setup our static files
-fastify.register(require("@fastify/static"), {
-  root: path.join(__dirname, "public"),
-  prefix: "/", // optional: default '/'
-});
-
-// fastify-formbody lets us parse incoming forms
-fastify.register(require("@fastify/formbody"));
-
-// point-of-view is a templating manager for fastify
-fastify.register(require("@fastify/view"), {
-  engine: {
-    handlebars: require("handlebars"),
-  },
-});
-
-// Our main GET home page route, pulls from src/pages/index.hbs
-fastify.get("/", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
-  let params = {
-    greeting: "Hello Node!",
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/index.hbs", params);
-});
-
-// A POST route to handle form submissions
-fastify.post("/webhook", async (req, res) => {
-    const lineConfig = getLineConfig(req, res)
-    const lineClient = new Client(lineConfig)
-    console.info(
-      { ingest: "line", event: JSON.stringify(req.body) },
-      "Received webhook from LINE"
-    )
-    const data = await handleWebhook(req.body.events, lineClient)
-    return data
-});
-
-async function handleWebhook(events, client) {
-  for (const event of events) {
-    if (event.type === "message") {
-      await handleMessageEvent(event,client)
-    }
+app.all("*", (req,res) => {
+  res.status(404);
+  if(req.accepts('html')){
+    res.sendFile(path.join(__dirname, 'views','404.html'));
+  } else if (req.accepts('json')) {
+    res.json({error : "404 Not Found"});
+  }else {
+    res.type('txt').send('404 Not Found')
   }
-}
+})
 
-async function handleMessageEvent(event,client){
-  const { replyToken, message } = event
-  
-    if(event.source.userId !== process.env.LINE_USER_ID){
-      await client.replyMessage(replyToken,toMessages('unauthorized'))
-      return 
-    }
+app.listen(process.env.PORT, () => {
+  console.log("Server is running on port : ",process.env.PORT);
+})
 
-    if (message.type === 'text') {
-      const reply = await handleTextMessage(message.text)
-      console.log(reply)
-      await client.replyMessage(replyToken,toMessages(reply))
 
-    }else if (message.type === 'image') {
-      const content = await client.getMessageContent(message.id)
-      const buffer = await readAsBuffer(content)
-      const reply = await handleImage(buffer)
-      await client.replyMessage(replyToken, toMessages(reply))
-    }
 
-}
 
-const readAsBuffer = (stream) => {
-  return new Promise((resolve, reject) => {
-    stream.on("error", e => {
-      reject(e)
-    })
-    const bufs = []
-    stream.on("end", () => {
-      resolve(Buffer.concat(bufs))
-    })
-    stream.on("data", buf => {
-      bufs.push(buf)
-    })
-  })
-}
-
-const getLineConfig = (req, res) => {
-  return {
-    channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
-    channelSecret: process.env.LINE_CHANNEL_SECRET
-  }
-}
-
-// Run the server and report out to the logs
-fastify.listen(
-  { port: process.env.PORT, host: "0.0.0.0" },
-   function (err, address) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    // await authenticateImplicitWithAdc();
-    console.log(`Your app is listening on ${address}`);
-  }
-);

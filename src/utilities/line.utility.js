@@ -3,7 +3,7 @@ const toMessages = (data) => {
   if (typeof data === "string") data = [{ type: "text", text: data }]
   return data
 }
-
+  
 const createBubble = (
   title,
   text,
@@ -62,15 +62,32 @@ const createBubble = (
   }
 }
 
-function truncate(text, maxLength) {
+const  truncate = (text, maxLength) => {
   return text.length + 5 > maxLength
     ? text.substr(0, maxLength - 5) + "…"
     : text
 }
 
+const readAsBuffer = (stream) => {
+  return new Promise((resolve, reject) => {
+    stream.on("error", e => {
+      reject(e)
+    })
+    const bufs = []
+    stream.on("end", () => {
+      resolve(Buffer.concat(bufs))
+    })
+    stream.on("data", buf => {
+      bufs.push(buf)
+    })
+  })
+}
+  
 const utility = {
   toMessages,
-  createBubble
+  createBubble,
+  readAsBuffer
 };
 
 module.exports = utility;
+  
