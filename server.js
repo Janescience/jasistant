@@ -1,6 +1,9 @@
 const express = require('express');
 // const cors = require("cors")
 const path = require("path");
+
+const errorHandler  = require('./src/middlewares/error-handler');
+
 const dotenv = require('dotenv');
 dotenv.config();
 // Initialize Express App 
@@ -39,6 +42,8 @@ app.all("*", (req,res) => {
     res.type('txt').send('404 Not Found')
   }
 })
+
+app.use(errorHandler)
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port : ",process.env.PORT);

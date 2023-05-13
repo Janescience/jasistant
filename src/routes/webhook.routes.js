@@ -1,5 +1,5 @@
 const controller = require("../controllers/webhook.controller");
-
+const { logger } = require("../middlewares/log-events");
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -9,5 +9,5 @@ module.exports = function(app) {
     next();
   });
 
-  app.get('/webhook',controller.webhook);
+  app.get('/webhook',[logger],controller.webhook);
 };
