@@ -8,11 +8,13 @@ const { toMessages,readAsBuffer } = require('../utilities/line.utility')
 exports.webhook = async (req, res) => {
     const client = new Client(lineConfig())
     const events = req.body.events;
+    let data;
     for (const event of events) {
       if (event.type === "message") {
-        return await messageEvent(event,client)
+        data = await messageEvent(event,client)
       }
     }
+    return data;
 }
 
 const messageEvent = async (event,client) => {
