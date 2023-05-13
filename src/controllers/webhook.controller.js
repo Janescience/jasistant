@@ -6,7 +6,7 @@ const { Client } =  require('@line/bot-sdk')
 const { toMessages,readAsBuffer } = require('../utilities/line.utility')
 
 exports.webhook = async (req, res) => {
-    const client = new Client(lineConfig)
+    const client = new Client(lineConfig())
     console.info(
         { ingest: "line", event: JSON.stringify(req.body) },
         "Received webhook from LINE"
