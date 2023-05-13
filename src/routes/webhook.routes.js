@@ -9,5 +9,5 @@ module.exports = function(app) {
     next();
   });
 
-  app.get('/webhook',[logger],controller.webhook);
+  app.post('/webhook',[logger],controller.webhook);
 };
