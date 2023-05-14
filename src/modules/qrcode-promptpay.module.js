@@ -1,6 +1,6 @@
 const qrcode = require('qrcode')
 const generatePayload = require('promptpay-qr')
-const { putBlob,getBlobUrl } = require('../utilities/storage.utility')
+const { putBlob,getBlobUrl,deleteBlob } = require('../utilities/storage.utility')
 
 const generateQrcode = async (amount) => {
 
@@ -21,6 +21,8 @@ const generateQrcode = async (amount) => {
     previewImageUrl: blobUrl
   };
 
+  await deleteBlob(blobName);
+  
   return message;
 }
 

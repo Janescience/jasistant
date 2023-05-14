@@ -30,6 +30,13 @@ const getBlob = async (blobName) => {
   return response[0]
 }
 
+const deleteBlob = async (blobName) => {
+  await storage
+    .bucket("tmpblobimg")
+    .file(blobName)
+    .delete();
+}
+
 const getBlobUrl = async (blobName) => {
   const result = await storage
     .bucket("tmpblobimg")
@@ -46,6 +53,7 @@ const getBlobUrl = async (blobName) => {
 const cloudStorage = {
   putBlob,
   getBlob,
+  deleteBlob,
   getBlobUrl
 };
 
