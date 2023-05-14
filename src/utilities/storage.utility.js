@@ -1,11 +1,12 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
 const path = require("path")
+const config = require("../config/gcs.config")
 
-const projectId = 'personal-assistant-bot-386307'
 const storage = new Storage({
-  projectId: projectId,
-  keyFilename : path.join(__dirname,'../personal-assistant-bot-386307-29fcb916c4d4.json')
+  // projectId: 'personal-assistant-bot-386307',
+  // keyFilename : path.join(__dirname,'../config/gcs.config')
+  credentials : config
 })
 
 let latest
