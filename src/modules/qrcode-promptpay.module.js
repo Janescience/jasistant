@@ -23,7 +23,7 @@ const generateQrcode = async (amount) => {
        {
         type: 'image',
         originalContentUrl: blobUrl,
-        previewImageUrl: blobUrl
+        previewImageUrl: ''
       }
       ,{
         type: "text",
@@ -32,7 +32,7 @@ const generateQrcode = async (amount) => {
     ]
   };
   const bubble = createBubble('QRCode Promptpay',body)
-  
+
   await deleteBlob(blobName);
 
   return bubble;
