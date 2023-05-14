@@ -33,6 +33,7 @@ const messageEvent = async (event,client) => {
         await client.replyMessage(replyToken,toMessages(reply))
     }else if (message.type === 'image') {
         const content = await client.getMessageContent(message.id)
+        console.log('image content : ',content)
         const buffer = await readAsBuffer(content)
         const reply = await imageService(buffer)
         await client.replyMessage(replyToken, toMessages(reply))
