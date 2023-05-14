@@ -31,7 +31,9 @@ const messageEvent = async (event,client) => {
     if (message.type === 'text') {
         const reply = await messageService(message.text)
         await client.replyMessage(replyToken,toMessages(reply.message))
-        await deleteBlob(reply.blobName);
+        setTimeout(() => {
+            deleteBlob(reply.blobName);
+        }, 3000);
     }else if (message.type === 'image') {
         const content = await client.getMessageContent(message.id)
         const buffer = await readAsBuffer(content)

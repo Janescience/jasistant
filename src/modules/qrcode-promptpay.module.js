@@ -37,10 +37,7 @@ const generateQrcode = async (amount) => {
     originalContentUrl: blobUrl,
     previewImageUrl: blobUrl
   }
-  console.log('qrcode return : ',{
-    message: message,
-    blobName : blobName
-  })
+
   return {
       message: message,
       blobName : blobName
