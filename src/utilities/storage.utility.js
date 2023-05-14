@@ -1,11 +1,17 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
 const path = require("path")
-const config = require("../config/gcs.config")
-console.log('config :',config)
-const storage = new Storage({
+const { credential } = require('@google-cloud/storage');
+
+// Create a new Credentials object with your authentication credentials
+const myCredentials = credential.cert({
   projectId: 'personal-assistant-bot-386307',
-  keyFilename : path.join(__dirname,'../config/gcs.config.js')
+  clientEmail: 'assistant-storage@personal-assistant-bot-386307.iam.gserviceaccount.com',
+  privateKey: process.env.GCS_PRIVATE_KEY,
+});
+
+const storage = new Storage({
+  credentials: myCredentials
 })
 
 let latest
