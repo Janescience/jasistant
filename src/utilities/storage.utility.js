@@ -4,9 +4,9 @@ const path = require("path")
 
 const storage = new Storage({
   credentials: {
-    projectId: 'personal-assistant-bot-386307',
-    clientEmail: 'assistant-storage@personal-assistant-bot-386307.iam.gserviceaccount.com',
-    privateKey: process.env.GCS_PRIVATE_KEY,
+    project_id: 'personal-assistant-bot-386307',
+    client_email: 'assistant-storage@personal-assistant-bot-386307.iam.gserviceaccount.com',
+    private_key: process.env.GCS_PRIVATE_KEY,
   }
 })
 
