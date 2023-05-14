@@ -21,9 +21,9 @@ const putBlob = async (buffer, extension) => {
 }
 
 const getBlob = async (blobName) => {
-  if (latest && latest.blobName === blobName) {
-    return latest.buffer
-  }
+  // if (latest && latest.blobName === blobName) {
+  //   return latest.buffer
+  // }
   const response = await storage
     .bucket("tmpblobimg")
     .file(blobName)

@@ -1,5 +1,6 @@
 const vision = require('@google-cloud/vision')
-const { getBlob,putBlob } =  require('../utilities/storage.utility')
+const path = require('path')
+const { getBlob,putBlob,getBlobUrl } =  require('../utilities/storage.utility')
 
 const imageService = async (buffer) => {
 
@@ -8,8 +9,10 @@ const imageService = async (buffer) => {
 
     const blob = await getBlob(blobName)
     console.log('image blob : ',blob)
+    const blobUrl = await getBlobUrl(blobName)
+    console.log('image blobUrl : ',blobUrl)
 
-    const imageAnnotator = new vision.ImageAnnotatorClient()
+    const imageAnnotator = new vision.ImageAnnotatorClient({keyFilename:path.join(__dirname,'../personal-assistant-bot-386307-29fcb916c4d4.json')})
     const results = await imageAnnotator.documentTextDetection(blob)
     const fullTextAnnotation = results[0].fullTextAnnotation
     
