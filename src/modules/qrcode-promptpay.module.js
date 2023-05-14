@@ -37,9 +37,8 @@ const generateQrcode = async (amount) => {
     originalContentUrl: blobUrl,
     previewImageUrl: blobUrl
   }
-  await deleteBlob(blobName);
 
-  return message;
+  return {message,blobName};
 }
 
 module.exports = generateQrcode;

@@ -4,6 +4,7 @@ const imageService = require("../services/image.service");
 
 const { Client } =  require('@line/bot-sdk')
 const { toMessages,readAsBuffer } = require('../utilities/line.utility')
+const { deleteBlob } = require('../utilities/storage.utility')
 
 exports.webhook = async (req, res) => {
     const client = new Client(config())
@@ -32,10 +33,10 @@ const messageEvent = async (event,client) => {
         await client.replyMessage(replyToken,toMessages(reply))
     }else if (message.type === 'image') {
         const content = await client.getMessageContent(message.id)
-        console.log('image content : ',content.data)
         const buffer = await readAsBuffer(content)
         const reply = await imageService(buffer)
-        await client.replyMessage(replyToken, toMessages(reply))
+        await client.replyMessage(replyToken, toMessages(reply.message))
+        await deleteBlob(reply.blobName);
     }
   
 }  
