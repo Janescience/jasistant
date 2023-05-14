@@ -14,8 +14,7 @@ const imageService = async (buffer) => {
     console.log('image blobUrl : ',blobUrl)
 
     const imageAnnotator = new vision.ImageAnnotatorClient({
-        // keyFilename:path.join(__dirname,'../config/gcs.config')
-        credentials : config
+        keyFilename:path.join(__dirname,'../config/gcs.config.js')
     })
     const results = await imageAnnotator.documentTextDetection(blob)
     const fullTextAnnotation = results[0].fullTextAnnotation
