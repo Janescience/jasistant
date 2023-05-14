@@ -12,7 +12,7 @@ const imageService = async (buffer) => {
     const blobUrl = await getBlobUrl(blobName)
     console.log('image blobUrl : ',blobUrl)
 
-    const imageAnnotator = new vision.ImageAnnotatorClient();
+    const imageAnnotator = new vision.ImageAnnotatorClient({keyFilename : path.join(__dirname,'../personal-assistant-bot.json')});
     const results = await imageAnnotator.documentTextDetection(blob)
     const fullTextAnnotation = results[0].fullTextAnnotation
     
