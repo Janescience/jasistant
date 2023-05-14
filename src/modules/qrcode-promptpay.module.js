@@ -37,8 +37,14 @@ const generateQrcode = async (amount) => {
     originalContentUrl: blobUrl,
     previewImageUrl: blobUrl
   }
-
-  return {message,blobName};
+  console.log('qrcode return : ',{
+    message: message,
+    blobName : blobName
+  })
+  return {
+      message: message,
+      blobName : blobName
+    }
 }
 
 module.exports = generateQrcode;
