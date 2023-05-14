@@ -16,26 +16,30 @@ const generateQrcode = async (amount) => {
   const blobName = await putBlob(bufferImage, ".jpg")
   const blobUrl = await getBlobUrl(blobName)
 
-  const body = {
-    type: "box",
-    layout: "hotizontal",
-    contents: [
-       {
-        type: 'image',
-        originalContentUrl: blobUrl,
-        previewImageUrl: ''
-      }
-      ,{
-        type: "text",
-        text: `${amount} บาท`,
-      },
-    ]
-  };
-  const bubble = createBubble('QRCode Promptpay',body)
-
+  // const body = {
+  //   type: "box",
+  //   layout: "hotizontal",
+  //   contents: [
+  //      {
+  //       type: 'image',
+  //       originalContentUrl: blobUrl,
+  //       previewImageUrl: ''
+  //     }
+  //     ,{
+  //       type: "text",
+  //       text: `${amount} บาท`,
+  //     },
+  //   ]
+  // };
+  // const bubble = createBubble('QRCode Promptpay',body)
+  const message = {
+    type: 'image',
+    originalContentUrl: blobUrl,
+    previewImageUrl: blobUrl
+  }
   await deleteBlob(blobName);
 
-  return bubble;
+  return message;
 }
 
 module.exports = generateQrcode;
