@@ -32,10 +32,21 @@ const generateQrcode = async (amount) => {
   //   ]
   // };
   // const bubble = createBubble('QRCode Promptpay',body)
-  const message = {
-    type: 'image',
-    originalContentUrl: blobUrl,
-    previewImageUrl: blobUrl
+  const message = 
+  {
+      type: "box",
+      layout: "hotizontal",
+      contents:[
+        {
+          type: 'image',
+          originalContentUrl: blobUrl,
+          previewImageUrl: blobUrl
+        },
+        {
+          type: "text",
+          text: `${amount} บาท`,
+        }
+      ]
   }
 
   return {
