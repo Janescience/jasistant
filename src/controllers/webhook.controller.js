@@ -31,14 +31,21 @@ const messageEvent = async (event,client) => {
     if (message.type === 'text') {
         const reply = await messageService(message.text)
         await client.replyMessage(replyToken,toMessages(reply.message))
-        setTimeout(() => {
-            deleteBlob(reply.blobName);
-        }, 3000);
+        if(reply.blobName){
+            setTimeout(() => {
+                deleteBlob(reply.blobName);
+            }, 3000);
+        }
     }else if (message.type === 'image') {
         const content = await client.getMessageContent(message.id)
         const buffer = await readAsBuffer(content)
         const reply = await imageService(buffer)
-        await client.replyMessage(replyToken, toMessages(reply))
+        await client.replyMessage(replyToken, toMessages(reply.message))
+        if(reply.blobName){
+            setTimeout(() => {
+                deleteBlob(reply.blobName);
+            }, 3000);
+        }
     }
   
 }  

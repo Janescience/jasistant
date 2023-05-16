@@ -71,7 +71,7 @@ const expenseTracking = async (name, amount, category) => {
       },
     },
   });
-  return bubble;
+  return {message:bubble};
 };
 
 const expenseTable = () => {
