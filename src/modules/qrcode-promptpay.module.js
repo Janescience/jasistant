@@ -33,22 +33,18 @@ const generateQrcode = async (amount) => {
   // };
   // const bubble = createBubble('QRCode Promptpay',body)
   const message = 
-  {
-      type: "box",
-      layout: "hotizontal",
-      contents:[
-        {
-          type: 'image',
-          originalContentUrl: blobUrl,
-          previewImageUrl: blobUrl
-        },
-        {
-          type: "text",
-          text: `${amount} บาท`,
-        }
-      ]
-  }
-
+  [
+    {
+      type: 'image',
+      originalContentUrl: blobUrl,
+      previewImageUrl: blobUrl
+    },
+    {
+      type: "text",
+      text: `${amount} บาท`,
+    }
+  ]
+  
   return {
       message: message,
       blobName : blobName
