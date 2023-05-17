@@ -30,7 +30,7 @@ const messageService = async (message) =>{
 
       return await expenseTracking(name,amount, ctg)
     }else if(match = message.match(/^(expctg)$/i)){
-      return {message :  JSON.stringify(category) }
+      return {message :  JSON.stringify(category,null,4) }
     }else if(match = message.match(/^(qr)([\d.]+)$/i)){
       const m = match
       const amount = Number(match[2])
