@@ -22,30 +22,32 @@ const handleWebhook = async (events, client) => {
 
 const messageEvent = async (event,client) => {
     const { replyToken, message } = event
+    try {
+        if(event.source.userId !== process.env.LINE_USER_ID){
+            await client.replyMessage(replyToken,toMessages('unauthorized'))
+            return 
+        }
     
-    if(event.source.userId !== process.env.LINE_USER_ID){
-        await client.replyMessage(replyToken,toMessages('unauthorized'))
-        return 
-    }
-
-    if (message.type === 'text') {
-        const reply = await messageService(message.text)
-        await client.replyMessage(replyToken,toMessages(reply.message))
-        if(reply.blobName){
-            setTimeout(() => {
-                deleteBlob(reply.blobName);
-            }, 3000);
+        if (message.type === 'text') {
+            const reply = await messageService(message.text)
+            await client.replyMessage(replyToken,toMessages(reply.message))
+            if(reply.blobName){
+                setTimeout(() => {
+                    deleteBlob(reply.blobName);
+                }, 3000);
+            }
+        }else if (message.type === 'image') {
+            const content = await client.getMessageContent(message.id)
+            const buffer = await readAsBuffer(content)
+            const reply = await imageService(buffer)
+            await client.replyMessage(replyToken, toMessages(reply.message))
+            if(reply.blobName){
+                setTimeout(() => {
+                    deleteBlob(reply.blobName);
+                }, 3000);
+            }
         }
-    }else if (message.type === 'image') {
-        const content = await client.getMessageContent(message.id)
-        const buffer = await readAsBuffer(content)
-        const reply = await imageService(buffer)
-        await client.replyMessage(replyToken, toMessages(reply.message))
-        if(reply.blobName){
-            setTimeout(() => {
-                deleteBlob(reply.blobName);
-            }, 3000);
-        }
+    } catch (error) {
+        await client.replyMessage(replyToken,toMessages(error))
     }
-  
 }  

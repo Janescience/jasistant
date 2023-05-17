@@ -1,5 +1,5 @@
 const toMessages = (data) => {
-  if (!data) data = "..."
+  if (!data) data = "Data reply is undefined..."
   if (typeof data === "string") data = [{ type: "text", text: data }]
   return data
 }
