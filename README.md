@@ -1,7 +1,24 @@
-# Expense Tracking (LINE Bot)
+# Personal Assistant Engine (LINE Bot)
 
-This is node backend for expense record from line bot.
+This is Node.js backend for LINE Bot.
 
+Passion from [automatron](https://github.com/dtinth/automatron) 
+
+## Features
+
+- Expense tracking with [Airtable.com](https://www.airtable.com/)
+- Genearate QRCode Promptpay
+- Image processing to text
+- Auto expense tracking from K PLUS and TrueMoney Wallet  notifications. (Inprogress)
+
+## Technologies
+
+- Express.js framework.
+- Google Cloud Storage (Save all files)
+- Google Cloud Vision (Image to text)
+- [qrcode](https://www.npmjs.com/package/qrcode)
+- [promptpay-qr](https://www.npmjs.com/package/promptpay-qr)
+- [Vercel](https://vercel.com/) for hosting.
 
 ## What's in this project?
 
@@ -13,15 +30,6 @@ This is node backend for expense record from line bot.
 
 ← `src/`: This folder holds page templates, additional scripts.
 
-### Working in the `src/` folder 📁
+← `views/`: This folder html pages.
 
-← `src/pages/index.hbs`: This is the main page template for your site.
 
-![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
-
-## You built this with Glitch!
-
-[Glitch](https://glitch.com) is a friendly community where millions of people come together to build web apps and websites.
-
-- Need more help? [Check out our Help Center](https://help.glitch.com/) for answers to any common questions.
-- Ready to make it official? [Become a paid Glitch member](https://glitch.com/pricing) to boost your app with private sharing, more storage and memory, domains and more.
