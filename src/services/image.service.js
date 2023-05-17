@@ -8,7 +8,16 @@ const imageService = async (buffer) => {
 
     const blob = await getBlob(blobName)
 
-    const imageAnnotator = new vision.ImageAnnotatorClient();
+    const imageAnnotator = new vision.ImageAnnotatorClient(
+        {
+            projectId: process.env.GCS_PROJECT_ID,
+            scopes: 'https://www.googleapis.com/auth/cloud-platform',
+            credentials: {
+              client_email: process.env.GCS_EMAIL,
+              private_key: process.env.GCS_PRIVATE_KEY
+            }
+        }
+    );
     const results = await imageAnnotator.documentTextDetection(blob)
     const fullTextAnnotation = results[0].fullTextAnnotation
     
