@@ -1,7 +1,16 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
 
-const storage = new Storage();
+const storage = new Storage(
+  {
+    projectId: process.env.GCS_PROJECT_ID,
+    scopes: 'https://www.googleapis.com/auth/cloud-platform',
+    credentials: {
+      client_email: process.env.GCS_EMAIL,
+      private_key: process.env.GCS_PRIVATE_KEY
+    }
+  }
+);
 
 let latest
 
