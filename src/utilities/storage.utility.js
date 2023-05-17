@@ -1,10 +1,7 @@
 const { Storage } = require("@google-cloud/storage")
 const { nanoid } = require("nanoid")
 
-const storage = new Storage({
-  projectId : process.env.GCS_PROJECT_ID,
-  keyFilename : process.env.GCS_URI_KEY
-});
+const storage = new Storage();
 
 let latest
 
