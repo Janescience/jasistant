@@ -2,7 +2,7 @@
 
 This is Node.js backend for LINE Bot.
 
-Passion from [automatron](https://github.com/dtinth/automatron) 
+❤️ Passion from [automatron](https://github.com/dtinth/automatron) 🔥
 
 ## Features
 
