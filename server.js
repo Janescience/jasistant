@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 // const cors = require("cors")
 const path = require("path");
 const fs = require("fs");
@@ -12,7 +13,7 @@ const app = express();
 app.use(express.json({limit:'50mb'}))
 app.use(express.urlencoded({limit: '50mb', extended:true }))
 app.use(express.static(path.join(__dirname, '/public')))
-
+app.use(bodyParser.text())
 // const whitelist = ['https://cow-app.vercel.app','https://dairy-farm-app.onrender.com','http://localhost:5173','http://localhost:4000'];
 // const corsOption = {
 //   origin: (origin, callback) => {
