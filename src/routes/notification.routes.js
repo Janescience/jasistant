@@ -1,5 +1,4 @@
 const controller = require("../controllers/notification.controller");
-const { logger } = require("../middlewares/log-events");
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -9,5 +8,5 @@ module.exports = function(app) {
     next();
   });
 
-  app.post('/notification',[logger],controller.notification);
+  app.post('/notification',controller.notification);
 };

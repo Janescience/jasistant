@@ -2,8 +2,8 @@ const Airtable = require("airtable");
 const { AirtableRecord } = require("airtable");
 const { createBubble } = require("../utilities/line.utility");
 
-const expenseTracking = async (name, amount, category) => {
-  const date = new Date();
+const expenseTracking = async (time,name,amount, category) => {
+  const date = time ? time : new Date();
   // Airtable
   const table = expenseTable();
   const record = await table.create(

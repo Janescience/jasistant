@@ -28,7 +28,7 @@ const messageService = async (message) =>{
       const ctg = category[m[2].toLowerCase()]
       const name = m[3] ? m[3] : ""
 
-      return await expenseTracking(name,amount, ctg)
+      return await expenseTracking(null,name,amount, ctg)
     }else if(match = message.match(/^(expctg)$/i)){
       return {message :  JSON.stringify(category,null,4) }
     }else if(match = message.match(/^(qr)([\d.]+)$/i)){
