@@ -18,11 +18,13 @@ exports.notification = async (req, res) => {
   console.log('notification package : ',packageName)
   console.log('notification title : ',title)
 
-  const amount = text.match(/\d+(\.\d+)/g).map(function(v) { return parseFloat(v); });
+  const amount = await text.match(/\d+(\.\d+)/g).map(function(v) { return parseFloat(v); });
   console.log('notification amount : ',amount)
 
-  if(packageName == "com.kasikorn.retail.mbanking.wap" && amount.lengh > 0){
-    console.log('expense recording...')
-    await expenseTracking(new Date(time),title,amount[0], "transfer")
+  if(packageName == "com.kasikorn.retail.mbanking.wap"){
+    if(title == 'รายการโอน/ถอน'){
+      console.log('expense recording...')
+      await expenseTracking(new Date(time),title,amount[0], "transfer")
+    }
   }
 };
