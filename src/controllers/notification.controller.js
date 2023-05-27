@@ -19,8 +19,10 @@ exports.notification = async (req, res) => {
   console.log('notification title : ',title)
 
   const amount = text.match(/\d+(\.\d+)/g).map(function(v) { return parseFloat(v); });
+  console.log('notification amount : ',amount)
 
   if(packageName == "com.kasikorn.retail.mbanking.wap" && amount.lengh > 0){
-    return await expenseTracking(new Date(time),title,amount[0], "transfer")
+    console.log('expense recording...')
+    await expenseTracking(new Date(time),title,amount[0], "transfer")
   }
 };
