@@ -25,6 +25,7 @@ exports.notification = async (req, res) => {
     if(title == 'รายการโอน/ถอน'){
       console.log('expense recording...')
       await expenseTracking(new Date(time),title,amount[0], "transfer")
+      return res.status(200).send({message : 'Expense recording success.'})
     }
   }
 };
