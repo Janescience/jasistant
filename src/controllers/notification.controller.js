@@ -22,7 +22,7 @@ exports.notification = async (req, res) => {
   console.log('notification amount : ',amount)
 
   if(packageName == "com.kasikorn.retail.mbanking.wap"){
-    if(title == 'รายการโอน/ถอน'){
+    if(title == 'รายการโอน/ถอน' || title == 'รายการใช้บัตร'){
       console.log('expense recording...')
       await expenseTracking(new Date(time),title,amount[0], "transfer")
       return res.status(200).send({message : 'Expense recording success.'})
