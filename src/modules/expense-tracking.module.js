@@ -21,13 +21,13 @@ const expenseTracking = async (time,name,amount, category) => {
     contents: [
       {
         type: "text",
-        text: "฿" + amount,
+        text: "฿" + amount + " บาท",
         size: "xxl",
         weight: "bold",
       },
       {
         type: "text",
-        text: `${category}${name ? "/" + name.trim() : ""}\nrecorded`,
+        text: `${category}${name ? "\n" + name.trim() : ""}`,
         wrap: true,
       },
     ],
@@ -39,7 +39,7 @@ const expenseTracking = async (time,name,amount, category) => {
   };
   const footer = await summary();
   const bubble = createBubble("Expense Tracking", body, {
-    headerColor: "#ffffbb",
+    headerColor: "#f7f7f2",
     footer: {
       type: "box",
       layout: "horizontal",
@@ -96,18 +96,13 @@ const summary = async () => {
         (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")) === date
     )
   );
-  const totalUsage = total(normalRecords);
   const dayNumber =
     Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1;
-  const [pacemakerPerDay, pacemakerBase] =
-    process.env.EXPENSE_PACEMAKER.split("/");
-  const pacemaker = +pacemakerBase + +pacemakerPerDay * dayNumber - totalUsage;
   const $ = (v) => `฿${v.toFixed(2)}`;
 
   return [
-    ["today", $(todayUsage)], //รายจ่ายรวมทั้งหมดของวันนี้
-    ["pace", $(pacemaker)], //งบทั้งหมดที่มี
-    ["day", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
+    ["รวมวันนี้", $(todayUsage)], //รายจ่ายรวมทั้งหมดของวันนี้
+    ["จำนวนวัน", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
   ];
 };
 

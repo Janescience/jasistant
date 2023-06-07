@@ -8,8 +8,8 @@ const createBubble = (
   title,
   text,
   {
-    headerBackground = "#353433",
-    headerColor = "#d7fc70",
+    headerBackground = "#1c1c1b",
+    headerColor = "#ffffff",
     textSize = "xl",
     altText = String(text),
     footer
