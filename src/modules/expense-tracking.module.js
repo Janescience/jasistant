@@ -21,7 +21,7 @@ const expenseTracking = async (time,name,amount, category) => {
     contents: [
       {
         type: "text",
-        text: "฿" + amount + " บาท",
+        text: "฿" + amount,
         size: "xxl",
         weight: "bold",
       },
@@ -101,8 +101,8 @@ const summary = async () => {
   const $ = (v) => `฿${v.toFixed(2)}`;
 
   return [
-    ["รวมวันนี้", $(todayUsage)], //รายจ่ายรวมทั้งหมดของวันนี้
-    ["จำนวนวัน", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
+    ["Today", $(todayUsage)], //รายจ่ายรวมทั้งหมดของวันนี้
+    ["Day", `${dayNumber}`], //รวมแล้วมีการบันทึกรายจ่ายทั้งหมดกี่วัน
   ];
 };
 
