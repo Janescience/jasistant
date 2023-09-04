@@ -15,15 +15,10 @@ exports.notification = async (req, res) => {
   const text = notification?.text
   const time = notification?.time
 
-  console.log('notification package : ',packageName)
-  console.log('notification title : ',title)
-
   const amount = await text.match(/\d+(\.\d+)/g).map(function(v) { return parseFloat(v); });
-  console.log('notification amount : ',amount)
 
   if(packageName == "com.kasikorn.retail.mbanking.wap"){
     if(title == 'รายการโอน/ถอน' || title == 'รายการใช้บัตร'){
-      console.log('expense recording...')
       await expenseTracking(new Date(time),title,amount[0], "transfer")
       return res.status(200).send({message : 'Expense recording success.'})
     }
