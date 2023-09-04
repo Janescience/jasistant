@@ -9,7 +9,7 @@ This is Node.js backend for LINE Bot.
 - Expense tracking with [Airtable.com](https://www.airtable.com/)
 - Genearate QRCode Promptpay
 - Image processing to text
-- Auto expense tracking from K PLUS and TrueMoney Wallet  notifications. (Inprogress)
+- Auto expense tracking from K PLUS and TrueMoney Wallet  notifications.
 
 ## Technologies
 
@@ -19,6 +19,7 @@ This is Node.js backend for LINE Bot.
 - [qrcode](https://www.npmjs.com/package/qrcode)
 - [promptpay-qr](https://www.npmjs.com/package/promptpay-qr)
 - [Vercel](https://vercel.com/) for hosting.
+- [tweetnacl-sealedbox-js](https://www.npmjs.com/package/tweetnacl-sealedbox-js) for transfer data with secret key.
 
 ## What's in this project?
 

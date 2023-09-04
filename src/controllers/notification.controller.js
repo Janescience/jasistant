@@ -1,7 +1,14 @@
 const sealedbox = require('tweetnacl-sealedbox-js');
 const expenseTracking = require("../modules/expense-tracking.module")
+const config = require("../config/line.config");
+
+const { Client } =  require('@line/bot-sdk')
+const { toMessages } = require('../utilities/line.utility')
 
 exports.notification = async (req, res) => {
+
+  const client = new Client(config())
+
   const result = sealedbox.open(
     Buffer.from(req.body, 'hex'),
     Buffer.from(process.env.NOTI_PUBLIC_KEY, 'base64'),
