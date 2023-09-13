@@ -2,11 +2,18 @@ const Airtable = require("airtable");
 const { AirtableRecord } = require("airtable");
 const { createBubble } = require("../utilities/line.utility");
 
+
+const expenseTable = () => {
+  return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
+    .base(process.env.AIRTABLE_EXPENSE_BASE)
+    .table("Expense Records");
+};
+
 const expenseTracking = async (time,name,amount, category) => {
   const date = time ? time : new Date();
+
   // Airtable
-  const table = expenseTable();
-  const record = await table.create(
+  const recorded = await expenseTable().create(
     {
       Name: name.trim(),
       Date: date,
@@ -15,6 +22,8 @@ const expenseTracking = async (time,name,amount, category) => {
     },
     { typecast: true }
   );
+
+  //Body
   const body = {
     type: "box",
     layout: "vertical",
@@ -34,10 +43,13 @@ const expenseTracking = async (time,name,amount, category) => {
     action: {
       type: "uri",
       label: "Open Airtable",
-      uri: process.env.AIRTABLE_EXPENSE_URI + "/" + record.getId(),
+      uri: process.env.AIRTABLE_EXPENSE_URI + "/" + recorded.getId(),
     },
   };
+
+  //Footer
   const footer = await summary();
+
   const bubble = createBubble("Expense Tracking", body, {
     headerColor: "#f7f7f2",
     footer: {
@@ -71,13 +83,8 @@ const expenseTracking = async (time,name,amount, category) => {
       },
     },
   });
-  return {message:bubble};
-};
 
-const expenseTable = () => {
-  return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
-    .base(process.env.AIRTABLE_EXPENSE_BASE)
-    .table("Expense Records");
+  return {message:bubble};
 };
 
 const summary = async () => {
@@ -85,19 +92,17 @@ const summary = async () => {
   const tableData = await expenseTable().select().all();
   const normalRecords = tableData.filter((r) => !r.get("Occasional"));
   const records = AirtableRecord;
-  const total = (records) =>
-    records.map((r) => +r.get("Amount") || 0).reduce((a, b) => a + b, 0);
+  const total = (records) => records.map((r) => +r.get("Amount") || 0).reduce((a, b) => a + b, 0);
   const firstDate = normalRecords
     .map((r) => (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")))
     .reduce((a, b) => (a < b ? a : b), date);
+
   const todayUsage = total(
     normalRecords.filter(
-      (r) =>
-        (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")) === date
+      (r) => (r.get("Date") ? r.get("Date").split("T")[0] : r.get("Date")) === date
     )
   );
-  const dayNumber =
-    Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1;
+  const dayNumber = Math.round((Date.parse(date) - Date.parse(firstDate)) / 86400e3) + 1;
   const $ = (v) => `฿${v.toFixed(2)}`;
 
   return [

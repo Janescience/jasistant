@@ -3,7 +3,6 @@ const expenseTracking = require("../modules/expense-tracking.module")
 const config = require("../config/line.config");
 
 const { Client } =  require('@line/bot-sdk')
-const { toMessages } = require('../utilities/line.utility')
 
 exports.notification = async (req, res) => {
 

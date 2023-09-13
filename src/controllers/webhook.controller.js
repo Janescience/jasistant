@@ -9,7 +9,8 @@ const { deleteBlob } = require('../utilities/storage.utility')
 exports.webhook = async (req, res) => {
     const client = new Client(config())
     const events = req.body.events;
-    return await handleWebhook(events, client)
+    const result = await handleWebhook(events, client);
+    return res.status(200).send(result)
 };
 
 const handleWebhook = async (events, client) => {

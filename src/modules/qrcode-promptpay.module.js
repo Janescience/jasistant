@@ -1,7 +1,6 @@
 const qrcode = require('qrcode')
 const generatePayload = require('promptpay-qr')
-const { putBlob,getBlobUrl,deleteBlob } = require('../utilities/storage.utility')
-const { createBubble } = require("../utilities/line.utility");
+const { putBlob,getBlobUrl } = require('../utilities/storage.utility')
 
 const generateQrcode = async (amount) => {
 
@@ -16,22 +15,6 @@ const generateQrcode = async (amount) => {
   const blobName = await putBlob(bufferImage, ".jpg")
   const blobUrl = await getBlobUrl(blobName)
 
-  // const body = {
-  //   type: "box",
-  //   layout: "hotizontal",
-  //   contents: [
-  //      {
-  //       type: 'image',
-  //       originalContentUrl: blobUrl,
-  //       previewImageUrl: ''
-  //     }
-  //     ,{
-  //       type: "text",
-  //       text: `${amount} บาท`,
-  //     },
-  //   ]
-  // };
-  // const bubble = createBubble('QRCode Promptpay',body)
   const message = 
   [
     {

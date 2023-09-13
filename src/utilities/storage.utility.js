@@ -12,22 +12,16 @@ const storage = new Storage(
   }
 );
 
-let latest
-
 const putBlob = async (buffer, extension) => {
   const blobName = nanoid() + extension
   await storage
     .bucket("tmpblobimg")
     .file(blobName)
     .save(buffer)
-  latest = { blobName, buffer }
   return blobName
 }
 
 const getBlob = async (blobName) => {
-  // if (latest && latest.blobName === blobName) {
-  //   return latest.buffer
-  // }
   const response = await storage
     .bucket("tmpblobimg")
     .file(blobName)

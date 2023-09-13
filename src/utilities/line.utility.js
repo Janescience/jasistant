@@ -75,7 +75,6 @@ const readAsBuffer = (stream) => {
     })
     const bufs = []
     stream.on("end", () => {
-      console.log('bufs : ',bufs)
       resolve(Buffer.concat(bufs))
     })
     stream.on("data", buf => {
