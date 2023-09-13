@@ -49,6 +49,7 @@ const messageEvent = async (event,client) => {
             }
         }
     } catch (error) {
-        await client.replyMessage(replyToken,toMessages(error))
+        console.error('Error : ',error)
+        // await client.replyMessage(replyToken,toMessages(error))
     }
 }  
