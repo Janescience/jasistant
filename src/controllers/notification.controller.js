@@ -21,8 +21,8 @@ exports.notification = async (req, res) => {
   let match;
 
   // Regex get Currency from String
-  if(match = text.match(/(?!0\.00)\d{1,3}(,\d{1,9})*(\.\d\d)+(?:\.)?/g)){
-    amount = Number(match[0].replace(/[^0-9.-]+/g,""))
+  if(match = text.match(/([^\d]|^)((?!0\.00)\d{1,3}(,\d{3})*(\.\d\d))([^\d]|$)/g)){
+    amount = Number(match[2].replace(/[^0-9.-]+/g,""))
   }
    
   if(amount > 0){
